@@ -55,8 +55,8 @@ def check_password(controller):
 def add_visitor(file, data):
     
     df = pd.read_csv(file, sep=",")
-    st.dataframe(data)
-    df = df.append(data, ignore_index=True)
+    #df = df.append(data, ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
     st.dataframe(df)
     df.to_csv(file, index=False)
     
