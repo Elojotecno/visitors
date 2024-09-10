@@ -157,7 +157,7 @@ def main():
         st.stop()
 
     user_cookie = controller.get('usr')
-    st.write(f'Bienvenue {user_cookie})
+    st.write(f'Bienvenue {user_cookie}')
 
     # App lay-out
     header = st.container(border=False)
