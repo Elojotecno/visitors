@@ -221,7 +221,7 @@ def main():
 
         header.subheader('Geomapping visiteurs')
         
-        df = pd.read_csv("visitors.csv", sep=",")
+        df = pd.read_csv(file, sep=",")
         show_map(df, content)
     
 
