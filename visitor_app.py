@@ -220,9 +220,6 @@ def main():
 
     if sb_menu == "View map":
 
-        if not check_password():
-        st.stop()
-
         header.subheader('Geomapping visiteurs')
         
         df = pd.read_csv(file, sep=",")
