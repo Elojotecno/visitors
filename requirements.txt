@@ -1,6 +1,7 @@
 ﻿streamlit
 streamlit-option-menu
 streamlit-authenticator
+streamlit-cookie-controller
 pandas
 plotly.express
 plotly
