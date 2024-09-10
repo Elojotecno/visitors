@@ -6,6 +6,7 @@ Created on 08/30/2024
 import pandas as pd
 import streamlit as st
 from streamlit_option_menu import option_menu
+from streamlit_cookies_controller import CookieController
 import hmac
 from geopy.geocoders import Nominatim
 import plotly.express as px
@@ -14,10 +15,6 @@ prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur']
 eqt_list = ['SBS', 'HB', 'Rotary', 'Robot', 'Other']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Other']
 file = "./data/visitors.csv"
-
-from streamlit_cookies_controller import CookieController
-
-st.set_page_config('Cookie QuickStart', '🍪', layout='wide')
 
 def check_password():
     
