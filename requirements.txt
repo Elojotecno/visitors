@@ -1,6 +1,7 @@
 ﻿streamlit
 streamlit-option-menu
 extra-streamlit-components==0.1.55
+streamlit-cookies-controller
 pandas
 plotly.express
 plotly
