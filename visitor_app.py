@@ -16,7 +16,7 @@ eqt_list = ['SBS', 'HB', 'Rotary', 'Robot', 'Other']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Other']
 file = "./data/visitors.csv"
 
-def check_password():
+def check_password(controller):
     
     def login_form():
         
@@ -27,7 +27,6 @@ def check_password():
 
     def password_entered():
 
-        controller = CookieController()
         controller.set('usr', st.session_state["username"])
         
         if st.session_state["username"] in st.secrets[
@@ -149,11 +148,13 @@ def show_map(df, container):
     container.plotly_chart(fig, use_container_width=True)
 
 def main():
+        
+    controller = CookieController()
+    user_cookie = controller.get('usr')
 
     if not check_password():
         st.stop()
-
-    user_cookie = controller.get('usr')
+    
     st.write(f'Bienvenue {user_cookie}')
 
     # App lay-out
