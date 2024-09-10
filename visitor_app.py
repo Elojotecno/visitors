@@ -15,6 +15,10 @@ eqt_list = ['SBS', 'HB', 'Rotary', 'Robot', 'Other']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Other']
 file = "./data/visitors.csv"
 
+from streamlit_cookies_controller import CookieController
+
+st.set_page_config('Cookie QuickStart', '🍪', layout='wide')
+
 def check_password():
     
     def login_form():
@@ -25,6 +29,9 @@ def check_password():
             st.form_submit_button("Log in", on_click=password_entered)
 
     def password_entered():
+
+        controller = CookieController()
+        controller.set('usr', st.session_state["username"])
         
         if st.session_state["username"] in st.secrets[
             "passwords"
@@ -34,13 +41,12 @@ def check_password():
         ):
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # Don't store the username or password.
-            #del st.session_state["username"]
+            del st.session_state["username"]
         else:
             st.session_state["password_correct"] = False
 
     # Return True if the username + password is validated.
     if st.session_state.get("password_correct", False):
-        st.write(f' Bienvenue {st.session_state["username"]}')
         return True
 
     # Show inputs for username + password.
@@ -149,6 +155,9 @@ def main():
 
     if not check_password():
         st.stop()
+
+    user_cookie = controller.get('usr')
+    st.write(f'Bienvenue {user_cookie})
 
     # App lay-out
     header = st.container(border=False)
