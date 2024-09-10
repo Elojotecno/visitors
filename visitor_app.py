@@ -152,7 +152,7 @@ def main():
     controller = CookieController()
     user_cookie = controller.get('usr')
 
-    if not check_password():
+    if not check_password(controller):
         st.stop()
     
     st.write(f'Bienvenue {user_cookie}')
