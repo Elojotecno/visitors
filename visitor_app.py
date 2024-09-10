@@ -33,6 +33,7 @@ def check_password():
             st.secrets.passwords[st.session_state["username"]],
         ):
             st.session_state["password_correct"] = True
+            usr = st.session_state["username"]
             del st.session_state["password"]  # Don't store the username or password.
             del st.session_state["username"]
         else:
@@ -40,7 +41,7 @@ def check_password():
 
     # Return True if the username + password is validated.
     if st.session_state.get("password_correct", False):
-        st.write(f' Bienvenue {st.session_state["username"]}')
+        st.write(f' Bienvenue {usr}')
         return True
 
     # Show inputs for username + password.
