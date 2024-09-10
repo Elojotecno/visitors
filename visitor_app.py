@@ -170,7 +170,7 @@ def main():
 
         header.subheader('Nouveau Visiteur')
 
-        sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Sophie', 'Yann'])
+        sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'])
         
 
         if sam != "...":
