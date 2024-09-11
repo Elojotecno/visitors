@@ -151,7 +151,7 @@ def show_map(df, container):
 
 def show_stats(df):
 
-    st.table(df.sort_values(by='dept', ascending=True))
+    st.table(df.sort_values(by='name', ascending=True))
 
     
 def main():
