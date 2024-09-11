@@ -214,7 +214,6 @@ def main():
         
     controller = CookieController()
     user_cookie = controller.get('usr')
-    df = None
 
     if not check_password(controller):
         st.stop()
@@ -308,8 +307,7 @@ def main():
 
         header.subheader('Geomapping visiteurs')
 
-        if df is None:
-            df = pd.read_csv(file, sep=";")
+        df = pd.read_csv(file, sep=";")
 
         show_map(df, content)
         show_stats(df, content)
@@ -318,8 +316,7 @@ def main():
 
         header.subheader('Statistiques visiteurs')
 
-        if df is None:
-            df = pd.read_csv(file, sep=";")
+        df = pd.read_csv(file, sep=";")
 
         show_analytics(df, content)
        
