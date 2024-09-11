@@ -195,7 +195,7 @@ def main():
             product = content.selectbox("Projet", prod_list)
             submit = content.button('Valider')
 
-            content.write("check out this [link](%s)" % terms_and_conditions_fj)
+            content.write("Règles sur le traitement de vos données à lire [link](%s) ici" % terms_and_conditions_fj)
             gdpr_agreed = content.checkbox("J'ai lu les conditions et j'accepte le traitement de mes données par FullwoodJoz.")
 
             if gdpr_agreed:
