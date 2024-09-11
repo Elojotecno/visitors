@@ -151,6 +151,7 @@ def show_map(df, container):
 
 def show_stats(df):
 
+    df['dept'] = df['dept'].astype("str")
     st.table(df.sort_values(by='name', ascending=True))
 
     for index, row in df.iterrows():
