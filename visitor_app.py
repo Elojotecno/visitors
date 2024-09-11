@@ -10,6 +10,7 @@ from streamlit_cookies_controller import CookieController
 import hmac
 from geopy.geocoders import Nominatim
 import plotly.express as px
+import datetime
 
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
 eqt_list = ['SBS', 'HB', 'Rotary', 'Robot', 'Autre']
@@ -196,6 +197,7 @@ def main():
 
         if sam != "...":
 
+            date = datetime.datetime.now()
             farm = content.text_input('Elevage')
             name = content.text_input('Nom')
             address = content.text_input('Adresse')
