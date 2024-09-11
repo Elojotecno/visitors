@@ -24,26 +24,15 @@ st.set_page_config(layout="wide")
 
 def search_city(zip):
     
-    api_base = 'https://geo.api.gouv.fr/communes?codePostal='
-    
-    if len(zip) == 5:
-
-		url = api_base + zip
-		cnx = urllib.request.urlopen(url)
-		contenu = cnx.read().decode('utf8')
-		json_lisible = json.loads(contenu)
-
-	def recup_infos(self, infos_liste):
+	api_base = 'https://geo.api.gouv.fr/communes?codePostal='
+	
+	def recup_infos(infos_liste):
 		noms = []
 		for info in infos_liste:
 			noms.append(info['nom'])
 		return noms
 
-	def print_list(self, ma_liste):
-		for obj in ma_liste:
-			print (obj)
-
-	def fait_details(self):
+	def fait_details():
 		result = []
 		for obj in self.recup_json():
 			x = {
@@ -52,13 +41,23 @@ def search_city(zip):
 			result.append(x)
 		return result
 
-	def affiche_details(self):
-		for details in self.fait_details():
-			print ("nom".ljust(20), ":", details['nom'])
-			del details['nom']
-			for key,value in details.items():
-				print (key.capitalize().ljust(20), ":", str(value).capitalize())
-			print ("")
+	def affiche_details(details):
+		for detail in details():
+			print ("nom".ljust(20), ":", detail['nom'])
+			del detail['nom']
+			for key,value in detail.items():
+				st.write(key.capitalize().ljust(20), ":", str(value).capitalize())
+    
+	if len(zip) == 5:	
+		url = api_base + zip
+		cnx = urllib.request.urlopen(url)
+		contenu = cnx.read().decode('utf8')
+		json_lisible = json.loads(contenu)
+		infos = recup_infos(infos_liste)
+		details = fait_details()
+		affiche_details(details)
+
+	
 
 def check_password(controller):
     
