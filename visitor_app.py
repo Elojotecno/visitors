@@ -151,12 +151,10 @@ def show_map(df, container):
 
 def show_stats(df, container):
 
-    df = pd.read_csv(file, sep=",")
     container.dataframe(df.sort_values(by='name', ascending=True))
 
 def show_analytics(df, container):
 
-    df = pd.read_csv(file, sep=",")
     visitor_count = df['sales'].value_counts()
     container.metric(label="Visiteurs", value=visitor_count)
     
@@ -258,6 +256,8 @@ def main():
     if sb_menu == "Analytics":
 
         header.subheader('Statistiques visiteurs')
+
+        df = pd.read_csv(file, sep=",")
         show_analytics(df, content)
        
     
