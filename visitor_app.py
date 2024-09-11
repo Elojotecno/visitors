@@ -23,7 +23,7 @@ terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 st.set_page_config(layout="wide")
 
 def search_city(zip):
-    
+	
 	api_base = 'https://geo.api.gouv.fr/communes?codePostal='
 	
 	def recup_infos(infos_liste):
@@ -31,7 +31,7 @@ def search_city(zip):
 		for info in infos_liste:
 			noms.append(info['nom'])
 		return noms
-
+	
 	if len(zip) == 5:
 		
 		url = api_base + zip
@@ -40,8 +40,11 @@ def search_city(zip):
 		json_lisible = json.loads(contenu)
 		list_city = recup_infos(json_lisible)
 
-		return list_city
-		
+	else:
+		list_city = ["Pas de ville trouvée..."]
+	
+	return list_city
+					
 
 	
 
