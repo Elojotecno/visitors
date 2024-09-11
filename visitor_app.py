@@ -58,9 +58,9 @@ def check_password(controller):
 
 def add_visitor(file, data, container):
     
-    df = pd.read_csv(file, sep=",")
+    df = pd.read_csv(file, sep=";")
     df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
-    df.to_csv(file, index=False)
+    df.to_csv(file, sep=";", index=False)
 
     container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées à .", icon="ℹ️")
 
@@ -283,7 +283,7 @@ def main():
 
         header.subheader('Geomapping visiteurs')
         
-        df = pd.read_csv(file, sep=",")
+        df = pd.read_csv(file, sep=";")
         show_map(df, content)
         show_stats(df, content)
 
@@ -291,7 +291,7 @@ def main():
 
         header.subheader('Statistiques visiteurs')
 
-        df = pd.read_csv(file, sep=",")
+        df = pd.read_csv(file, sep=";")
         show_analytics(df, content)
        
     
