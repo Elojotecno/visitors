@@ -163,7 +163,7 @@ def show_analytics(df, container):
         visitor_count = df.shape[0]
         col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
 
-        dept_count = df['dept'].unique().value_counts()
+        dept_count = df['dept'].nunique()
         st.write(dept_count)
         col2.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
     
