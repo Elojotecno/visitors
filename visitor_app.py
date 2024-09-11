@@ -157,7 +157,7 @@ def show_analytics(df, container):
 
     sales_reg = list(df['sales'].value_counts())
     st.write(sales_reg)
-    visitor_count = df['sales'].value_counts()
+    visitor_count = df['sales'].sum()
     container.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
     
 def main():
