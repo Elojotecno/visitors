@@ -227,7 +227,8 @@ def show_analytics(df, container):
         fig2 = px.histogram(df, x="date", title='Visiteurs par date & heure')
         col200.plotly_chart(fig2, use_container_width=True)
     
-    
+def get_zip_value():
+        st.write(st.session_state['Code postal'])    
     
 def main():
         
@@ -272,7 +273,7 @@ def main():
             farm = content.text_input('Elevage')
             name = content.text_input('Nom')
             address = content.text_input('Adresse')
-            zip = content.text_input('Code postal', onchange=search_city(zip))
+            zip = content.text_input('Code postal', onchange=search_city(zip), key='Code postal')
             dept = zip[:2]
             city = content.text_input('Ville')
             mobile = content.text_input('Mobile')
