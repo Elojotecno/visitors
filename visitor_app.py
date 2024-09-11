@@ -11,9 +11,9 @@ import hmac
 from geopy.geocoders import Nominatim
 import plotly.express as px
 
-prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur']
-eqt_list = ['SBS', 'HB', 'Rotary', 'Robot', 'Other']
-brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Other']
+prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
+eqt_list = ['SBS', 'HB', 'Rotary', 'Robot', 'Autre']
+brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Autre']
 file = "./data/visitors.csv"
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 
@@ -147,6 +147,11 @@ def show_map(df, container):
     
     container.plotly_chart(fig, use_container_width=True)
 
+def show_stats(df):
+
+    st.table(df)
+
+    
 def main():
         
     controller = CookieController()
@@ -240,6 +245,7 @@ def main():
         
         df = pd.read_csv(file, sep=",")
         show_map(df, content)
+        show_stats(df)
     
 
 if __name__ == "__main__":
