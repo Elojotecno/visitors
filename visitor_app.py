@@ -167,11 +167,9 @@ def show_analytics(df, container):
     
         columns = st.columns(len_dept)
     
-            for index, option in enumerate(options):                
-                with columns[index+1]:    
-                    container.metric(label=option, value=visitor_count, delta=None, help=None, label_visibility="visible")
-
-    
+        for index, option in enumerate(options):                
+            with columns[index+1]:    
+                container.metric(label=option, value=visitor_count, delta=None, help=None, label_visibility="visible")    
 
         fig = px.histogram(df, x="sales", color='sales')
         container.plotly_chart(fig, use_container_width=True)
