@@ -158,7 +158,7 @@ def show_analytics(df, container):
 
     with container.container(border=False): 
 
-        col1, col2 = container.columns(2)
+        col1, col2 = st.columns(2)
         
         visitor_count = df.shape[0]
         col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
