@@ -151,7 +151,7 @@ def show_map(df, container):
 
 def show_stats(df):
 
-    df['zip'].astype('int32').dtypes
+    df['zip'].astype('str').dtypes
     st.table(df.sort_values(by='name', ascending=True))
 
     for index, row in df.iterrows():
