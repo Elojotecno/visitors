@@ -156,7 +156,7 @@ def show_stats(df, container):
 
 def show_analytics(df, container):
 
-    fig = px.histogram(df, x="sales")
+    fig = px.histogram(df, x="sales", color='sales')
     container.plotly_chart(fig, use_container_width=True)
 
     fig1 = px.histogram(df, x="date")
