@@ -32,31 +32,16 @@ def search_city(zip):
 			noms.append(info['nom'])
 		return noms
 
-	def fait_details():
-		result = []
-		for obj in self.recup_json():
-			x = {
-				'nom': obj['nom'],
-			}
-			result.append(x)
-		return result
-
-	def affiche_details(details):
-		for detail in details():
-			print ("nom".ljust(20), ":", detail['nom'])
-			del detail['nom']
-			for key,value in detail.items():
-				st.write(key.capitalize().ljust(20), ":", str(value).capitalize())
-    
-	if len(zip) == 5:	
+	if len(zip) == 5:
+		
 		url = api_base + zip
 		cnx = urllib.request.urlopen(url)
 		contenu = cnx.read().decode('utf8')
 		json_lisible = json.loads(contenu)
-		noms = recup_infos(json_lisible)
-		st.write(noms)
-		#details = fait_details()
-		#affiche_details(details)
+		list_city = recup_infos(json_lisible)
+
+		return list_city
+		
 
 	
 
