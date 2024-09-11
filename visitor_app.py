@@ -167,7 +167,7 @@ def show_analytics(df, container):
         col2.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
 
         dept_sales = df['sales'].nunique()
-        col2.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
+        col3.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
 
         fig = px.pie(df, values="product", names="product", hole=.4, title='Types de projet')
         fig.update_traces(textposition='outside', textinfo='percent+label')
