@@ -258,7 +258,7 @@ def main():
             address = content.text_input('Adresse')
             zip = content.text_input('Code postal')
             dept = zip[:2]
-	    list_ville = search_city(zip)
+	    liste_ville = search_city(zip)
             city = content.multiselect("Ville", list_ville)
             mobile = content.text_input('Mobile')
             cows = content.text_input('Nb vaches laitières')
