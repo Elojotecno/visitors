@@ -164,6 +164,7 @@ def show_analytics(df, container):
         col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
 
         dept_count = df['dept'].unique()
+        st.write(dept_count)
         col2.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
     
         fig0 = px.pie(df, values="dept", names="dept", hole=.3, title='Visiteurs par département')
