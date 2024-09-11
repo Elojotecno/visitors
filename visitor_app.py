@@ -112,7 +112,7 @@ def show_map(df, container):
                     symbol="circle",
                     color="red",
                     line=dict(width=2,
-                    color='red',
+                    color='Orange',
                     )),
                     opacity=0.75,
                     selector=dict(mode="markers")
