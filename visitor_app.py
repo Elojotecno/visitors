@@ -253,13 +253,12 @@ def main():
         
         df = pd.read_csv(file, sep=",")
         show_map(df, content)
+        show_stats(df, content)
 
     if sb_menu == "Analytics":
 
         header.subheader('Statistiques visiteurs')
 
-        if df != None:
-            show_stats(df, content)
             show_analytics(df, content)
         else:
             content.write("No data to show here.")
