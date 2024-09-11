@@ -195,37 +195,44 @@ def main():
             product = content.selectbox("Projet", prod_list)
             submit = content.button('Valider')
 
+            st.write("check out this [terms_and_conditions_fj](%s)" % url)
+            gdpr_agreed = content.checkbox("J'ai lu les conditions et j'accepte le traitement de mes données par FullwoodJoz.")
+
+            if gdpr_agreed:
             
-            if submit:                
+                if submit:                
+    
+                    if address is not None:
+                        adr = f'{address}, {zip}, {city}'
+                    else:
+                        adr = f'{zip}, {city}'
+    
+                    lat, lon = geocode_adr(adr)
+    
+                    if (lat!=None) and (lon!=None):
+    
+                        data_dict = {
+                            'sales' : sam,
+                            'farm': farm,
+                            'name': name,
+                            'address': address,
+                            'zip': zip,
+                            'dept': dept,
+                            'city': city,
+                            'mobile': mobile,
+                            'cows': cows,
+                            'eqt': milking_eqt,
+                            'brand': brand,
+                            'product': product,
+                            'lat':lat,
+                            'lon':lon,
+                            }
+                        
+                        add_visitor(file, data_dict, content)
+            else:
 
-                if address is not None:
-                    adr = f'{address}, {zip}, {city}'
-                else:
-                    adr = f'{zip}, {city}'
-
-                lat, lon = geocode_adr(adr)
-
-                if (lat!=None) and (lon!=None):
-
-                    data_dict = {
-                        'sales' : sam,
-                        'farm': farm,
-                        'name': name,
-                        'address': address,
-                        'zip': zip,
-                        'dept': dept,
-                        'city': city,
-                        'mobile': mobile,
-                        'cows': cows,
-                        'eqt': milking_eqt,
-                        'brand': brand,
-                        'product': product,
-                        'lat':lat,
-                        'lon':lon,
-                        }
+                container.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")
                     
-                    add_visitor(file, data_dict, content)
-
 
     if sb_menu == "View map":
 
