@@ -221,7 +221,7 @@ def main():
                         'lon':lon,
                         }
                     
-                    add_visitor(file, data_dict)
+                    add_visitor(file, data_dict, content)
 
 
     if sb_menu == "View map":
