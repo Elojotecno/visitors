@@ -231,7 +231,7 @@ def main():
                         add_visitor(file, data_dict, content)
             else:
 
-                container.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")
+                content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")
                     
 
     if sb_menu == "View map":
