@@ -185,6 +185,7 @@ def main():
             name = content.text_input('Nom')
             address = content.text_input('Adresse')
             zip = content.text_input('Code postal')
+            dept = content.text_input('Code postal')[:2]
             city = content.text_input('Ville')
             mobile = content.text_input('Mobile', value="")
             cows = content.number_input('VL', value=None, placeholder="Ajouter un nombre...")
