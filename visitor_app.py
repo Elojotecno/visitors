@@ -152,7 +152,10 @@ def show_map(df, container):
 def show_stats(df):
 
     df = df.fillna(0)
-    df['dept'] = df['dept'].apply(lambda x: df['zip'][:2])
+
+    for index, row in df.iterrows():
+        row['dept'] = row['zip'][:2]
+        
     st.table(df.sort_values(by='name', ascending=True))
 
     
