@@ -225,15 +225,15 @@ def main():
         if sam != "...":
 
             now = datetime.datetime.now()
-            date = now.strftime("%d/%m/%Y, %H:%M:%S")
+            date = content.text_input('date', value = now.strftime("%d/%m/%Y, %H:%M:%S"))
             farm = content.text_input('Elevage')
             name = content.text_input('Nom')
             address = content.text_input('Adresse')
             zip = content.text_input('Code postal')
             dept = zip[:2]
             city = content.text_input('Ville')
-            mobile = content.text_input('Mobile', value="")
-            cows = content.number_input('VL', value=None, placeholder="Ajouter un nombre...")
+            mobile = content.text_input('Mobile')
+            cows = content.number_input('VL')
             milking_eqt = content.selectbox("Eqt. actuel", eqt_list)
             brand = content.selectbox("Marque", brand_list)
             product = content.selectbox("Projet", prod_list)
