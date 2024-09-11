@@ -163,13 +163,13 @@ def show_analytics(df, container):
     len_dept = len(df_dept)
     container.write(df_dept)
 
-   with container: 
+    with st.container(border=False): 
 
-    fig = px.histogram(df, x="sales", color='sales')
-    container.plotly_chart(fig, use_container_width=True)
-
-    fig1 = px.histogram(df, x="date")
-    container.plotly_chart(fig1, use_container_width=True)
+        fig = px.histogram(df, x="sales", color='sales')
+        container.plotly_chart(fig, use_container_width=True)
+    
+        fig1 = px.histogram(df, x="date")
+        container.plotly_chart(fig1, use_container_width=True)
     
     
     
