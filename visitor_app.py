@@ -162,7 +162,7 @@ def show_analytics(df, container):
     fig1 = px.histogram(df, x="date")
     container.plotly_chart(fig1, use_container_width=True)
     
-    visitor_count = df['sales'].sum()
+    visitor_count = df.shape[0]
     container.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
     
 def main():
