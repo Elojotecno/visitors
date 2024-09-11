@@ -154,6 +154,7 @@ def show_stats(df):
     df = df.fillna(0)
 
     for index, row in df.iterrows():
+        st.write(f"dept:{row['dept'] / zip:{row['zip']"}
         row['dept'] = row['zip'][:2]
         
     st.table(df.sort_values(by='name', ascending=True))
