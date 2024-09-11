@@ -110,11 +110,11 @@ def show_map(df, container):
     
     fig.update_traces(marker=dict(size=10,
                     symbol="circle",
-                    color="red",
+                    color="Cyan",
                     line=dict(width=2,
-                    color='Orange',
+                    color='lightskyblue',
                     )),
-                    opacity=0.75,
+                    opacity=0.8,
                     selector=dict(mode="markers")
                 )
     
@@ -135,7 +135,7 @@ def show_map(df, container):
                     bordercolor="Black", 
                     borderwidth=1
                     ),
-                    hoverlabel=dict(bgcolor="#333", bordercolor="#fff", font_color="#fff", font_size=15, font_family="Arial"),
+                    hoverlabel=dict(bgcolor="#fff", bordercolor="#fff", font_color="#000", font_size=12, font_family="MS Sans Serif"),
                     geo = dict(
                                 showland = True,
                                 showcountries=True,
