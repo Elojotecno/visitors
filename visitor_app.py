@@ -149,14 +149,14 @@ def show_map(df, container):
     
     container.plotly_chart(fig, use_container_width=True)
 
-def show_stats(df):
+def show_stats(df, container):
     
-    st.table(df.sort_values(by='name', ascending=True))
+    container.dataframe(df.sort_values(by='name', ascending=True))
 
-def show_analytics(df):
+def show_analytics(df, container):
 
     visitor_count = df['sales'].count()
-    content.metric(label="Visiteurs", value=visitor_count)
+    container.metric(label="Visiteurs", value=visitor_count)
     
 def main():
         
@@ -180,8 +180,8 @@ def main():
     with st.sidebar:
 
         sb_menu = option_menu('Options', 
-                                        ['Add visitor', 'View map'], 
-                                        icons=['folder-symlink', 'map'], 
+                                        ['Add visitor', 'Map', 'Analytics'], 
+                                        icons=['folder-symlink', 'map', 'activity'], 
                                         menu_icon='cast', default_index=0)
 
     if sb_menu == "Add visitor":
@@ -245,13 +245,18 @@ def main():
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")
                     
 
-    if sb_menu == "View map":
+    if sb_menu == "Map":
 
         header.subheader('Geomapping visiteurs')
         
         df = pd.read_csv(file, sep=",")
         show_map(df, content)
-        show_stats(df)
+
+    if sb_menu == "Analytics":
+
+        header.subheader('Statistiques visiteurs')
+        show_stats(df, content)
+        show_analytics(df, content)
     
 
 if __name__ == "__main__":
