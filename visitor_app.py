@@ -101,8 +101,8 @@ def show_map(df, container):
                     resolution=50,
                     showcoastlines=True, coastlinecolor="RebeccaPurple",
                     showland=True, landcolor="DarkGray",
-                    showlakes=True, lakecolor="Blue",
-                    showrivers=True, rivercolor="Blue",
+                    showlakes=False, lakecolor="Blue",
+                    showrivers=False, rivercolor="Blue",
                     showcountries=True, countrycolor=country_color,
                     showocean=True, oceancolor=ocean_color,
                     showsubunits=True, subunitcolor="white"
@@ -111,10 +111,10 @@ def show_map(df, container):
     fig.update_traces(marker=dict(size=10,
                     symbol="circle",
                     color="red",
-                    line=dict(width=1,
-                    color='white',
+                    line=dict(width=2,
+                    color='red',
                     )),
-                    opacity=0.95,
+                    opacity=0.75,
                     selector=dict(mode="markers")
                 )
     
