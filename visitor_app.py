@@ -157,9 +157,14 @@ def show_stats(df, container):
 def show_analytics(df, container):
 
     with container.container(border=False): 
+
+        col1, col2 = container.columns(2)
         
         visitor_count = df.shape[0]
-        container.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
+        col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
+
+        dept_count = df['dept'].counts_value()
+        col2.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
     
         fig0 = px.pie(df, values="dept", names="dept", hole=.3, title='Visiteurs par département')
         fig0.update_traces(textposition='outside', textinfo='percent+label')
