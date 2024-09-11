@@ -150,16 +150,13 @@ def show_map(df, container):
     container.plotly_chart(fig, use_container_width=True)
 
 def show_stats(df):
-
-    df['dept'] = df['dept'].astype("str")
+    
     st.table(df.sort_values(by='name', ascending=True))
 
-    for index, row in df.iterrows():
-        if row['dept'].iloc[index] == None:
-            row['dept'].iloc[index] = row['zip'].iloc[index].str.slice(0, 2)
-        
-    st.table(df.sort_values(by='name', ascending=True))
+def show_analytics(df):
 
+    visitor_count = df['sales'].count()
+    content.metric(label="Visiteurs", value=visitor_count)
     
 def main():
         
