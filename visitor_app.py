@@ -240,9 +240,6 @@ def main():
 
         header.subheader('Nouveau Visiteur')
 
-        if df is None:
-            df = pd.read_csv(file, sep=";")
-
         sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'])
 
         if sam != "...":
