@@ -156,14 +156,22 @@ def show_stats(df, container):
 
 def show_analytics(df, container):
 
-    fig = px.histogram(df, x="sales", color='sales')
-    container.plotly_chart(fig, use_container_width=True)
-
-    fig1 = px.histogram(df, x="date")
-    container.plotly_chart(fig1, use_container_width=True)
-    
     visitor_count = df.shape[0]
     container.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
+
+    df_dept = list(df['dept'].unique())
+    len_dept = len(df_dept)
+    container.write(df_dept)
+
+    
+
+        fig = px.histogram(df, x="sales", color='sales')
+        container.plotly_chart(fig, use_container_width=True)
+    
+        fig1 = px.histogram(df, x="date")
+        container.plotly_chart(fig1, use_container_width=True)
+    
+    
     
 def main():
         
