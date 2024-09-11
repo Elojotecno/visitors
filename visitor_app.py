@@ -255,8 +255,12 @@ def main():
     if sb_menu == "Analytics":
 
         header.subheader('Statistiques visiteurs')
-        show_stats(df, content)
-        show_analytics(df, content)
+
+        if df != None:
+            show_stats(df, content)
+            show_analytics(df, content)
+        else:
+            content.write("No data to show here.")
     
 
 if __name__ == "__main__":
