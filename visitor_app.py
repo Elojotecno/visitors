@@ -52,14 +52,13 @@ def check_password(controller):
     return False
 
 
-def add_visitor(file, data):
+def add_visitor(file, data, container):
     
     df = pd.read_csv(file, sep=",")
-    #df = df.append(data, ignore_index=True)
     df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
-    st.dataframe(df)
     df.to_csv(file, index=False)
-    
+
+    container.info(f" {data['farm'] enregistrée.", icon="ℹ️")
 
 def geocode_adr(adr, country='France'):
    
