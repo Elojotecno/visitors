@@ -59,7 +59,7 @@ def add_visitor(file, data, container):
     df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
     df.to_csv(file, index=False)
 
-    container.info(f" {data['farm']} dans le dept. {data['dept']} enregistrée.", icon="ℹ️")
+    container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées.", icon="ℹ️")
 
 def geocode_adr(adr, country='France'):
    
@@ -195,7 +195,7 @@ def main():
             product = content.selectbox("Projet", prod_list)
             submit = content.button('Valider')
 
-            st.write("check out this [link](%s)" % terms_and_conditions_fj)
+            content.write("check out this [link](%s)" % terms_and_conditions_fj)
             gdpr_agreed = content.checkbox("J'ai lu les conditions et j'accepte le traitement de mes données par FullwoodJoz.")
 
             if gdpr_agreed:
