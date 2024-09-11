@@ -135,7 +135,7 @@ def show_map(df, container):
                     bordercolor="Black", 
                     borderwidth=1
                     ),
-                    hoverlabel=dict(bgcolor="#fff", bordercolor="#fff", font_color="#000", font_size=12, font_family="MS Sans Serif"),
+                    hoverlabel=dict(bgcolor="#fff", bordercolor="#fff", font_color="#333", font_size=12, font_family="MS Sans Serif"),
                     geo = dict(
                                 showland = True,
                                 showcountries=True,
