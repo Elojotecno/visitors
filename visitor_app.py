@@ -327,7 +327,7 @@ def main():
         header.subheader('Statistiques visiteurs')
 
 	if df is None:
-		df = pd.read_csv(file, sep=";")
+	    df = pd.read_csv(file, sep=";")
 
         show_analytics(df, content)
        
