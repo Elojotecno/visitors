@@ -217,7 +217,6 @@ def main():
         
     controller = CookieController()
     user_cookie = controller.get('usr')
-    df = None
 
     if not check_password(controller):
         st.stop()
@@ -243,8 +242,6 @@ def main():
     if sb_menu == "Add visitor":
 
         header.subheader('Nouveau Visiteur')
-
-        df = pd.read_csv(file, sep=";")
 
         sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'])
 
