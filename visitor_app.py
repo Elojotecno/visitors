@@ -53,9 +53,10 @@ def search_city(zip):
 		cnx = urllib.request.urlopen(url)
 		contenu = cnx.read().decode('utf8')
 		json_lisible = json.loads(contenu)
-		infos = recup_infos(infos_liste)
-		details = fait_details()
-		affiche_details(details)
+		noms = recup_infos(infos_liste)
+		st.write(noms)
+		#details = fait_details()
+		#affiche_details(details)
 
 	
 
