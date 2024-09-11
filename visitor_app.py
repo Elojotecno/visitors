@@ -195,6 +195,7 @@ def main():
         
     controller = CookieController()
     user_cookie = controller.get('usr')
+    df = None
 
     if not check_password(controller):
         st.stop()
