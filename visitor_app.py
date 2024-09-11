@@ -158,24 +158,30 @@ def show_analytics(df, container):
 
     with container.container(border=False): 
 
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         
         visitor_count = df.shape[0]
         col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
 
         dept_count = df['dept'].nunique()
-        st.write(dept_count)
         col2.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
+
+        dept_sales = df['sales'].nunique()
+        col2.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
+
+        fig = px.pie(df, values="product", names="product", hole=.4, title='Types de')
+        fig.update_traces(textposition='outside', textinfo='percent+label')
+        col1.plotly_chart(fig, use_container_width=True)
     
-        fig0 = px.pie(df, values="dept", names="dept", hole=.3, title='Visiteurs par département')
+        fig0 = px.pie(df, values="dept", names="dept", hole=.5, title='Visiteurs par département')
         fig0.update_traces(textposition='outside', textinfo='percent+label')
-        container.plotly_chart(fig0, use_container_width=True)
+        col2.plotly_chart(fig0, use_container_width=True)
 
         fig1 = px.histogram(df, x="sales", color='sales', title='Visiteurs par SAM')
-        container.plotly_chart(fig1, use_container_width=True)
+        col1.plotly_chart(fig1, use_container_width=True)
     
         fig2 = px.histogram(df, x="date", title='Visiteurs par date & heure')
-        container.plotly_chart(fig2, use_container_width=True)
+        col2.plotly_chart(fig2, use_container_width=True)
     
     
     
