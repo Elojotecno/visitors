@@ -240,7 +240,7 @@ def main():
                     if (lat!=None) and (lon!=None):
     
                         data_dict = {
-                            'date' : 'date',
+                            'date' : date,
                             'sales' : sam,
                             'farm': farm,
                             'name': name,
