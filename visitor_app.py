@@ -279,19 +279,19 @@ def main():
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")
                     
 
-    if sb_menu == "Map":
+    if sb_menu == "Map" and (df is not None):
 
         header.subheader('Geomapping visiteurs')
         
-        df = pd.read_csv(file, sep=";")
+        #df = pd.read_csv(file, sep=";")
         show_map(df, content)
         show_stats(df, content)
 
-    if sb_menu == "Analytics":
+    if sb_menu == "Analytics" and (df is not None):
 
         header.subheader('Statistiques visiteurs')
 
-        df = pd.read_csv(file, sep=";")
+        #df = pd.read_csv(file, sep=";")
         show_analytics(df, content)
        
     
