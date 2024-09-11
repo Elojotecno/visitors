@@ -228,7 +228,7 @@ def show_analytics(df, container):
         col200.plotly_chart(fig2, use_container_width=True)
     
 def get_zip_value():
-        st.write(search_city(st.session_state['Code postal'])    
+        st.write(search_city(st.session_state['Code postal']))    
     
 def main():
         
