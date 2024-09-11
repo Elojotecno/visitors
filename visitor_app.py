@@ -212,6 +212,7 @@ def main():
                         'name': name,
                         'address': address,
                         'zip': zip,
+                        'dept': dept,
                         'city': city,
                         'mobile': mobile,
                         'cows': cows,
