@@ -15,7 +15,7 @@ prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur']
 eqt_list = ['SBS', 'HB', 'Rotary', 'Robot', 'Other']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Other']
 file = "./data/visitors.csv"
-terms_and_conditions_fj = "gdpr.txt"
+terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 
 def check_password(controller):
     
