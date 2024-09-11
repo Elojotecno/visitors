@@ -25,13 +25,14 @@ st.set_page_config(layout="wide")
 def search_city(zip):
 	
 	api_base = 'https://geo.api.gouv.fr/communes?codePostal='
+
+    def recup_infos(infos_liste):
 	
-	def recup_infos(infos_liste):
-		noms = []
-		for info in infos_liste:
-			noms.append(info['nom'])
-		return noms
-	
+	noms = []
+	for info in infos_liste:
+		noms.append(info['nom'])
+	return noms
+
 	if len(zip) == 5:
 		
 		url = api_base + zip
@@ -39,11 +40,11 @@ def search_city(zip):
 		contenu = cnx.read().decode('utf8')
 		json_lisible = json.loads(contenu)
 		list_city = recup_infos(json_lisible)
-
+	
 	else:
 		list_city = ["Pas de ville trouvée..."]
-	
-	return list_city
+
+    return list_city
 					
 
 	
