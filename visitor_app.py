@@ -99,7 +99,7 @@ def show_map(df, container):
     
     fig.update_geos(fitbounds="locations",
                     resolution=50,
-                    showcoastlines=True, coastlinecolor="RebeccaPurple",
+                    showcoastlines=True, coastlinecolor="White",
                     showland=True, landcolor="DarkGray",
                     showlakes=False, lakecolor="Blue",
                     showrivers=False, rivercolor="Blue",
