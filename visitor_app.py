@@ -151,6 +151,7 @@ def show_map(df, container):
 
 def show_stats(df):
 
+    df['dept'] = df['dept'].apply(lambda x: df['zip'][:2])
     st.table(df.sort_values(by='name', ascending=True))
 
     
