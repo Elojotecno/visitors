@@ -17,6 +17,8 @@ brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Le
 file = "./data/visitors.csv"
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 
+st.set_page_config(layout="wide")
+
 def check_password(controller):
     
     def login_form():
