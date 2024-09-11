@@ -150,11 +150,13 @@ def show_map(df, container):
     container.plotly_chart(fig, use_container_width=True)
 
 def show_stats(df, container):
-    
+
+    df = pd.read_csv(file, sep=",")
     container.dataframe(df.sort_values(by='name', ascending=True))
 
 def show_analytics(df, container):
 
+    df = pd.read_csv(file, sep=",")
     visitor_count = df['sales'].count()
     container.metric(label="Visiteurs", value=visitor_count)
     
