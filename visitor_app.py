@@ -155,7 +155,7 @@ def show_stats(df):
     st.table(df.sort_values(by='name', ascending=True))
 
     for index, row in df.iterrows():
-        row['dept'] = row['zip']str.slice(0, 2)
+        row['dept'] = row['zip'].str.slice(0, 2)
         st.write(row['dept'])
         
     st.table(df.sort_values(by='name', ascending=True))
