@@ -157,7 +157,7 @@ def show_stats(df, container):
 def show_analytics(df, container):
 
     df = pd.read_csv(file, sep=",")
-    visitor_count = df['sales'].count()
+    visitor_count = df['sales'].value_counts()
     container.metric(label="Visiteurs", value=visitor_count)
     
 def main():
