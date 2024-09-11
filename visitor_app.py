@@ -24,31 +24,23 @@ st.set_page_config(layout="wide")
 
 def search_city(zip):
 	
-    api_base = 'https://geo.api.gouv.fr/communes?codePostal='
-
-    def recup_infos(infos_liste):
-	
-        noms = []
-        for info in infos_liste:
-            noms.append(info['nom'])
-        return noms
-
     if len(zip) == 5:
-	
-        url = api_base + zip
-        cnx = urllib.request.urlopen(url)
+        
+        api_base = 'https://geo.api.gouv.fr/communes?codePostal='
+        noms_ville = []
+    
+        cnx = urllib.request.urlopen(api_base + zip)
         contenu = cnx.read().decode('utf8')
         json_lisible = json.loads(contenu)
-        list_city = recup_infos(json_lisible)
 
+        for info in json_lisible:
+            noms_ville.append(info['nom'])
+        return noms_ville
+    
     else:
     
-	    list_city = ["Pas de ville trouvée..."]
-
-    return list_city
-					
-
-	
+	    noms_ville.apend("Code postal erroné...")
+        
 
 def check_password(controller):
     
@@ -316,7 +308,8 @@ def main():
 
         header.subheader('Geomapping visiteurs')
 
-        df = pd.read_csv(file, sep=";")
+        if df is None:
+            df = pd.read_csv(file, sep=";")
 
         show_map(df, content)
         show_stats(df, content)
@@ -325,7 +318,8 @@ def main():
 
         header.subheader('Statistiques visiteurs')
 
-	df = pd.read_csv(file, sep=";")
+        if df is None:
+            df = pd.read_csv(file, sep=";")
 
         show_analytics(df, content)
        
