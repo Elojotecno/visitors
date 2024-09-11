@@ -161,7 +161,7 @@ def show_analytics(df, container):
         visitor_count = df.shape[0]
         container.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
     
-        df_dept = list(df['dept'].unique())
+        df_dept = list(df['dept'].value_counts())
         len_dept = len(df_dept)
         container.write(df_dept)
     
