@@ -300,7 +300,7 @@ def main():
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")
                     
 
-    if sb_menu == "Map" and (df is not None):
+    if sb_menu == "Map":
 
         header.subheader('Geomapping visiteurs')
 
@@ -309,7 +309,7 @@ def main():
         show_map(df, content)
         show_stats(df, content)
 
-    if sb_menu == "Analytics" and (df is not None):
+    if sb_menu == "Analytics":
 
         header.subheader('Statistiques visiteurs')
 
