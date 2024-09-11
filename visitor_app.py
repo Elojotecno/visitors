@@ -39,7 +39,7 @@ def search_city(zip):
     
     else:
     
-	noms_ville.apend("Code postal erroné...")
+	noms_ville.append("Code postal erroné...")
         
 
 def check_password(controller):
