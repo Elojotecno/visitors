@@ -161,8 +161,9 @@ def show_analytics(df, container):
         visitor_count = df.shape[0]
         container.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
     
-        fig = px.pie(df, values="dept", names="dept", hole=.3, title='Visiteurs par département')
-        fig.update_traces(textposition='inside', textinfo='percent+label')
+        fig0 = px.pie(df, values="dept", names="dept", hole=.3, title='Visiteurs par département')
+        fig0.update_traces(textposition='inside', textinfo='percent+label')
+        container.plotly_chart(fig0, use_container_width=True)
 
         fig1 = px.histogram(df, x="sales", color='sales', title='Visiteurs par SAM')
         container.plotly_chart(fig1, use_container_width=True)
