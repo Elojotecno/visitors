@@ -11,6 +11,8 @@ import hmac
 from geopy.geocoders import Nominatim
 import plotly.express as px
 import datetime
+import json
+import urllib.request
 
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
 eqt_list = ['TPA', 'Epi', 'Roto', 'Robot', 'Autre']
