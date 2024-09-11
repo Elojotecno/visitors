@@ -108,7 +108,7 @@ def show_map(df, container):
                     showsubunits=True, subunitcolor="white"
                 )
     
-    fig.update_traces(marker=dict(size=10,
+    fig.update_traces(marker=dict(size=8,
                     symbol="circle",
                     color="Cyan",
                     line=dict(width=2,
