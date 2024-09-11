@@ -200,7 +200,7 @@ def show_analytics(df, container):
         fig10.update_traces(textposition='inside', textinfo='percent+label')
         col10.plotly_chart(fig10)
 
-	fig20 = px.pie(df, values="product", names="product", hole=.5, title='Types de projet')
+        fig20 = px.pie(df, values="product", names="product", hole=.5, title='Types de projet')
         fig20.update_traces(textposition='inside', textinfo='percent+label')
         col20.plotly_chart(fig20)
 
