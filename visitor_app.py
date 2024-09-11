@@ -13,7 +13,7 @@ import plotly.express as px
 import datetime
 
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
-eqt_list = ['SBS', 'HB', 'Rotary', 'Robot', 'Autre']
+eqt_list = ['TPA', 'Epi', 'Roto', 'Robot', 'Autre']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Autre']
 file = "./data/visitors.csv"
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
@@ -233,10 +233,10 @@ def main():
             dept = zip[:2]
             city = content.text_input('Ville')
             mobile = content.text_input('Mobile')
-            cows = content.number_input('VL')
-            milking_eqt = content.selectbox("Eqt. actuel", eqt_list)
-            brand = content.selectbox("Marque", brand_list)
-            product = content.selectbox("Projet", prod_list)
+            cows = content.text_input('Nb vaches laitières')
+            milking_eqt = content.multiselect("Equipement actuel", eqt_list)
+            brand = content.multiselect("Marque actuelle", brand_list)
+            product = content.multiselect("Intéressé par", prod_list)
             submit = content.button('Valider')
 
             content.write("Règles sur le traitement de vos données à lire [ici](%s) " % terms_and_conditions_fj)
