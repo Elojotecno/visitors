@@ -171,13 +171,13 @@ def show_analytics(df, container):
 
         col10, col20 = st.columns(2)
 
-        fig = px.pie(df, values="product", names="product", hole=.4, title='Types de projet')
-        fig.update_traces(textposition='inside', textinfo='percent+label')
-        col10.plotly_chart(fig, use_container_width=True)
+        fig10 = px.pie(df, values="product", names="product", hole=.4, title='Types de projet')
+        fig10.update_traces(textposition='inside', textinfo='percent+label')
+        col10.plotly_chart(fig10, use_container_width=True)
     
-        fig0 = px.pie(df, values="dept", names="dept", hole=.5, title='Visiteurs par département')
-        fig0.update_traces(textposition='inside', textinfo='percent+label')
-        col20.plotly_chart(fig0, use_container_width=True)
+        fig20 = px.pie(df, values="dept", names="dept", hole=.5, title='Visiteurs par département')
+        fig20.update_traces(textposition='inside', textinfo='percent+label')
+        col20.plotly_chart(fig20, use_container_width=True)
 
         col100, col200 = st.columns(2)
 
