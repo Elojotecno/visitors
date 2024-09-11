@@ -159,9 +159,9 @@ def show_analytics(df, container):
     with container.container(border=False): 
         
         visitor_count = df.shape[0]
-        
+        container.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
     
-        df_dept = list(df['dept'].unique()).sum()
+        df_dept = list(df['dept'].unique().sum())
         len_dept = len(df_dept)
         container.write(df_dept)
     
@@ -169,7 +169,7 @@ def show_analytics(df, container):
     
             for index, option in enumerate(options):                
                 with columns[index+1]:    
-                 container.metric(label=option, value=visitor_count, delta=None, help=None, label_visibility="visible")
+                    container.metric(label=option, value=visitor_count, delta=None, help=None, label_visibility="visible")
 
     
 
