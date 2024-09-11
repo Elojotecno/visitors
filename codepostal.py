@@ -21,11 +21,11 @@ class GouvExo():
 		print ("La commune demandée est: ", self.commune)
 
 	def get_url(self):
-		url = self.api_base + 'communes?nom=' + self.commune
+		url = self.api_base + 'communes?codePostal=' + self.commune
 		return url
 
 	def recup_json(self):
-		url = self.api_base + 'communes?nom=' + self.commune
+		url = self.api_base + 'communes?codePostal=' + self.commune
 		cnx = urllib.request.urlopen(url)
 		contenu = cnx.read().decode('utf8')
 		json_lisible = json.loads(contenu)
@@ -34,7 +34,7 @@ class GouvExo():
 	def recup_infos(self, infos_liste):
 		noms = []
 		for info in infos_liste:
-			noms.append(info['codesPostaux'])
+			noms.append(info['nom'])
 		return noms
 
 	def print_list(self, ma_liste):
@@ -46,9 +46,6 @@ class GouvExo():
 		for obj in self.recup_json():
 			x = {
 				'nom': obj['nom'],
-				'code postal': obj['codesPostaux'],
-				'Numéro du département': obj['codeDepartement'],
-				'La population est de': obj['population'],
 			}
 			result.append(x)
 		return result
