@@ -23,11 +23,15 @@ terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 st.set_page_config(layout="wide")
 
 def search_city(zip):
+
+    noms_ville = []
+    api_base = 'https://geo.api.gouv.fr/communes?codePostal='
 	
-    if len(zip) == 5:
-        
-        api_base = 'https://geo.api.gouv.fr/communes?codePostal='
-        noms_ville = []
+    if len(zip) != 5:
+
+        noms_ville.append("Code postal erroné...")
+    
+    else:
     
         cnx = urllib.request.urlopen(api_base + zip)
         contenu = cnx.read().decode('utf8')
@@ -36,10 +40,9 @@ def search_city(zip):
         for info in json_lisible:
             noms_ville.append(info['nom'])
         return noms_ville
+
     
-    else:
-    
-	    noms_ville.append("Code postal erroné...")
+	    
         
 
 def check_password(controller):
@@ -193,13 +196,13 @@ def show_analytics(df, container):
 
         col10, col20 = st.columns(2)
 
-        fig10 = px.pie(df, values="eqt", names="eqt", hole=.4, title='Types de projet')
+        fig10 = px.pie(df, values="product", names="product", hole=.4, title='Types de projet')
         fig10.update_traces(textposition='inside', textinfo='percent+label')
         col10.plotly_chart(fig10)
     
-        fig20 = px.pie(df, values="dept", names="dept", hole=.5, title='Visiteurs par département')
-        fig20.update_traces(textposition='inside', textinfo='percent+label')
-        col20.plotly_chart(fig20)
+        #fig20 = px.pie(df, values="dept", names="dept", hole=.5, title='Visiteurs par département')
+        #fig20.update_traces(textposition='inside', textinfo='percent+label')
+        #col20.plotly_chart(fig20)
 
         col100, col200 = st.columns(2)
 
@@ -214,6 +217,7 @@ def main():
         
     controller = CookieController()
     user_cookie = controller.get('usr')
+    df = None
 
     if not check_password(controller):
         st.stop()
@@ -239,6 +243,9 @@ def main():
     if sb_menu == "Add visitor":
 
         header.subheader('Nouveau Visiteur')
+
+        if df is None:
+            df = pd.read_csv(file, sep=";")
 
         sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'])
 
@@ -300,20 +307,22 @@ def main():
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")
                     
 
-    if sb_menu == "Map":
+    if sb_menu == "Map" and (df is not None):
 
         header.subheader('Geomapping visiteurs')
 
-        df = pd.read_csv(file, sep=";")
+        if df is None:
+            df = pd.read_csv(file, sep=";")
 
         show_map(df, content)
         show_stats(df, content)
 
-    if sb_menu == "Analytics":
+    if sb_menu == "Analytics" and (df is not None):
 
         header.subheader('Statistiques visiteurs')
 
-        df = pd.read_csv(file, sep=";")
+        if df is None:
+            df = pd.read_csv(file, sep=";")
 
         show_analytics(df, content)
        
