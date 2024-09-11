@@ -22,6 +22,44 @@ terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 
 st.set_page_config(layout="wide")
 
+def search_city(zip):
+    
+    api_base = 'https://geo.api.gouv.fr/communes?codePostal='
+    
+    if len(zip) == 5:
+
+		url = api_base + zip
+		cnx = urllib.request.urlopen(url)
+		contenu = cnx.read().decode('utf8')
+		json_lisible = json.loads(contenu)
+
+	def recup_infos(self, infos_liste):
+		noms = []
+		for info in infos_liste:
+			noms.append(info['nom'])
+		return noms
+
+	def print_list(self, ma_liste):
+		for obj in ma_liste:
+			print (obj)
+
+	def fait_details(self):
+		result = []
+		for obj in self.recup_json():
+			x = {
+				'nom': obj['nom'],
+			}
+			result.append(x)
+		return result
+
+	def affiche_details(self):
+		for details in self.fait_details():
+			print ("nom".ljust(20), ":", details['nom'])
+			del details['nom']
+			for key,value in details.items():
+				print (key.capitalize().ljust(20), ":", str(value).capitalize())
+			print ("")
+
 def check_password(controller):
     
     def login_form():
@@ -234,7 +272,7 @@ def main():
             farm = content.text_input('Elevage')
             name = content.text_input('Nom')
             address = content.text_input('Adresse')
-            zip = content.text_input('Code postal')
+            zip = content.text_input('Code postal', onchange=search_city(zip))
             dept = zip[:2]
             city = content.text_input('Ville')
             mobile = content.text_input('Mobile')
