@@ -221,8 +221,10 @@ def main():
 
         header.subheader('Nouveau Visiteur')
 
+        if df is None:
+            df = pd.read_csv(file, sep=";")
+
         sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'])
-        
 
         if sam != "...":
 
@@ -284,16 +286,12 @@ def main():
     if sb_menu == "Map" and (df is not None):
 
         header.subheader('Geomapping visiteurs')
-        
-        #df = pd.read_csv(file, sep=";")
         show_map(df, content)
         show_stats(df, content)
 
     if sb_menu == "Analytics" and (df is not None):
 
         header.subheader('Statistiques visiteurs')
-
-        #df = pd.read_csv(file, sep=";")
         show_analytics(df, content)
        
     
