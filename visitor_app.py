@@ -164,7 +164,7 @@ def show_analytics(df, container):
         fig0 = px.pie(df, values="dept", names="dept", hole=.3, title='Visiteurs par département')
         fig.update_traces(textposition='inside', textinfo='percent+label')
 
-        fig = px.histogram(df, x="sales", color='sales', , title='Visiteurs par SAM')
+        fig = px.histogram(df, x="sales", color='sales', title='Visiteurs par SAM')
         container.plotly_chart(fig, use_container_width=True)
     
         fig1 = px.histogram(df, x="date", title='Visiteurs par date & heure')
