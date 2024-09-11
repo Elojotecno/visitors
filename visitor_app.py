@@ -62,7 +62,7 @@ def add_visitor(file, data, container):
     df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
     df.to_csv(file, index=False)
 
-    container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées.", icon="ℹ️")
+    container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées à .", icon="ℹ️")
 
 def geocode_adr(adr, country='France'):
    
@@ -197,7 +197,8 @@ def main():
 
         if sam != "...":
 
-            date = datetime.datetime.now()
+            now = datetime.datetime.now()
+            date = now.strftime("%d/%m/%Y, %H:%M:%S")
             farm = content.text_input('Elevage')
             name = content.text_input('Nom')
             address = content.text_input('Adresse')
@@ -228,6 +229,7 @@ def main():
                     if (lat!=None) and (lon!=None):
     
                         data_dict = {
+                            'date' : 'date',
                             'sales' : sam,
                             'farm': farm,
                             'name': name,
