@@ -151,12 +151,11 @@ def show_map(df, container):
 
 def show_stats(df):
 
-    df['zip'].astype('str').dtypes
     st.table(df.sort_values(by='name', ascending=True))
 
     for index, row in df.iterrows():
-        row['dept'] = row['zip'].str.slice(0, 2)
-        st.write(row['dept'])
+        if row['dept'].iloc[index] == None:
+            row['dept'].iloc[index] = row['zip'].iloc[index].str.slice(0, 2)
         
     st.table(df.sort_values(by='name', ascending=True))
 
