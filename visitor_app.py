@@ -168,9 +168,11 @@ def show_map(df, container):
     
     container.plotly_chart(fig, use_container_width=True)
 
-def show_stats(df, container):
+def show_stats(df, container, criteria="dept"):
 
-    container.dataframe(df.sort_values(by='name', ascending=True))
+    df = df.sort_values(by='dept', ascending=True)
+    container.dataframe(df.groupby(by=[criteria]))
+
 
 def pie_graph(df, fig, wrapper, values, names, title, hole=.5):
         fig = px.pie(df, values=values, names=names, hole=hole, title=title)
