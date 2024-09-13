@@ -170,8 +170,7 @@ def show_map(df, container):
 
 def show_stats(df, container, criteria):
 
-    df = df.sort_values(by=criteria, ascending=True)
-    container.data(df)
+    container.data(df.sort_values(by=criteria, ascending=True))
 
 def pie_graph(df, fig, wrapper, values, names, title, hole=.5):
         fig = px.pie(df, values=values, names=names, hole=hole, title=title)
