@@ -183,6 +183,8 @@ def hist_graph(df, fig, wrapper, x, color, title, use_container_width=True):
 
 def show_analytics(df, container):
         
+        col1, col2, col3 = st.columns(3)
+        
         visitor_count = df.shape[0]
         with st.container(border=True):
             col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
@@ -197,9 +199,9 @@ def show_analytics(df, container):
         
         with container.container(border=True): 
 
-            col1, col2, col3 = st.columns(3)
             col_pg1, col_pg2 = st.columns(2)
             col_hist1, col_hist2 = st.columns(2)
+
             fig_pg1, fig_pg2 = None, None
     
             pie_graph(df, fig_pg1, col_pg1, "dept", "dept", "Visiteurs par département")
