@@ -230,8 +230,7 @@ def main():
 
     # App lay-out
     header = st.container(border=False)
-    header.image('img/fjm.png')
-
+    
     content = st.container(border=False)
     
     footer = st.container(border=False)
@@ -246,6 +245,7 @@ def main():
 
     if sb_menu == "Add visitor":
 
+        header.image('img/fjm.png')
         header.subheader('Nouveau Visiteur')
 
         sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'])
