@@ -252,14 +252,9 @@ def main():
             name = content.text_input('Nom')
             address = content.text_input('Adresse')
             zip = content.text_input('Code postal')
-            dept = zip[:2]
-
-            if search_city(zip) is not None:
-                liste_ville = search_city(zip)
-            else:
-                list_ville = ["Pas de ville trouvée"]
-                
-            city = content.select("Ville", liste_ville)
+            dept = zip[:2] # Extract dept. number from zip code
+            liste_ville = search_city(zip) # Search city name out of zipcode
+            city = content.selectbox("Ville", liste_ville)
             mobile = content.text_input('Mobile')
             cows = content.text_input('Nb vaches laitières')
             milking_eqt = content.multiselect("Equipement actuel", eqt_list)
