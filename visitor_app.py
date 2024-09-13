@@ -93,8 +93,6 @@ def geocode_adr(adr, country='France'):
    
     geolocator = Nominatim(user_agent="visitus")
     location = geolocator.geocode(f'{adr}, {country}')
-    #st.write(location.address)
-    #st.write(location.raw)
 
     return location.latitude, location.longitude
 
@@ -179,6 +177,11 @@ def show_stats(df, container):
 
     container.dataframe(df.sort_values(by='name', ascending=True))
 
+def pie_graph(df, fig, wrapper, values, names, title, hole=.5):
+        fig = px.pie(df, values=values, names=names, hole=hole, title=title)
+        fig.update_traces(textposition='inside', textinfo='percent+label')
+        wrapper.plotly_chart(fig)
+
 def show_analytics(df, container):
 
     with container.container(border=False): 
@@ -194,15 +197,13 @@ def show_analytics(df, container):
         dept_sales = df['sales'].nunique()
         col3.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
 
-        col10, col20 = st.columns(2)
+        colpg1, colpg2 = st.columns(2)
+        figpg1, figpg2 = None
    
-        fig10 = px.pie(df, values="dept", names="dept", hole=.5, title='Visiteurs par département')
-        fig10.update_traces(textposition='inside', textinfo='percent+label')
-        col10.plotly_chart(fig10)
+        pie_graph(df, figpg1, colpg1, "dept", "dept", "Visiteurs par département")
 
-        fig20 = px.pie(df, values="product", names="product", hole=.5, title='Types de projet')
-        fig20.update_traces(textposition='inside', textinfo='percent+label')
-        col20.plotly_chart(fig20)
+        pie_graph(df, figpg2, colpg2, "product", "product", "Types de projet")
+        
 
         col100, col200 = st.columns(2)
 
@@ -255,7 +256,7 @@ def main():
             zip = content.text_input('Code postal')
             dept = zip[:2]
             liste_ville = search_city(zip)
-            city = content.multiselect("Ville", liste_ville)
+            city = content.select("Ville", liste_ville)
             mobile = content.text_input('Mobile')
             cows = content.text_input('Nb vaches laitières')
             milking_eqt = content.multiselect("Equipement actuel", eqt_list)
@@ -307,18 +308,18 @@ def main():
 
         header.subheader('Geomapping visiteurs')
 
-        df = pd.read_csv(file, sep=";")
+        df_map = pd.read_csv(file, sep=";")
 
-        show_map(df, content)
-        show_stats(df, content)
+        show_map(df_map, content)
+        show_stats(df_map, content)
 
     if sb_menu == "Analytics":
 
         header.subheader('Statistiques visiteurs')
 
-        df = pd.read_csv(file, sep=";")
+        df_analytics = pd.read_csv(file, sep=";")
 
-        show_analytics(df, content)
+        show_analytics(df_analytics, content)
        
     
 
