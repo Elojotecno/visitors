@@ -183,7 +183,7 @@ def hist_graph(df, fig, wrapper, x, color, title, use_container_width=True):
 
 def show_analytics(df, container):
         
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3 = container.columns(3)
         
         visitor_count = df.shape[0]
         with container.container(border=True):
