@@ -309,8 +309,8 @@ def main():
 
         criteria = content.selectbox("Critère", df_map.columns, index=1)
 
-        show_map(df_map, content, criteria)
-        show_stats(df_map, content)
+        show_map(df_map, content)
+        show_stats(df_map, content, criteria)
 
     if sb_menu == "Analytics":
 
