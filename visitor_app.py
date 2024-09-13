@@ -257,8 +257,8 @@ def main():
             city = content.selectbox("Ville", liste_ville)
             mobile = content.text_input('Mobile')
             cows = content.text_input('Nb vaches laitières')
-            milking_eqt = content.multiselect("Equipement actuel", eqt_list)
-            brand = content.multiselect("Marque actuelle", brand_list)
+            milking_eqt = content.selctbox("Equipement actuel", eqt_list)
+            brand = content.selectbox("Marque actuelle", brand_list)
             product = content.multiselect("Intéressé par", prod_list)
             submit = content.button('Valider')
 
