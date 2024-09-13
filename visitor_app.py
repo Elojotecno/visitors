@@ -206,7 +206,7 @@ def show_analytics(df, container):
    
         pie_graph(df, fig_pg1, colpg1, "dept", "dept", "Visiteurs par département")
 
-        pie_graph(df, fig_pg2, colpg2, "product", "product", "Types de projet")
+        hist_graph(df, fig_pg2, colpg2, "product", "product", "Types de projet")
         
         col_hist1, col_hist2 = st.columns(2)
         fig_hist1, fig_hist2 = None, None
