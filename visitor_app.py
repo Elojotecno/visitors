@@ -240,7 +240,7 @@ def main():
 
         st.image('img/fjm.png')
 
-        sb_menu = option_menu('Options', 
+        sb_menu = option_menu('Menu', 
                                         ['Add visitor', 'Map', 'Analytics'], 
                                         icons=['folder-symlink', 'map', 'activity'], 
                                         menu_icon='cast', default_index=0)
