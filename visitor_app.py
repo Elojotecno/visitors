@@ -238,6 +238,8 @@ def main():
 
     with st.sidebar:
 
+        st.image('img/fjm.png')
+
         sb_menu = option_menu('Options', 
                                         ['Add visitor', 'Map', 'Analytics'], 
                                         icons=['folder-symlink', 'map', 'activity'], 
