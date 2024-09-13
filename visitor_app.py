@@ -204,7 +204,6 @@ def show_analytics(df, container):
 
         hist_graph(df, fig_pg2, colpg2, "product", "product", "Types de projet")
         
-        
         fig_hist1, fig_hist2 = None, None
 
         hist_graph(df, fig_hist1, col_hist1, "sales", "sales", "Visiteurs par SAM")
@@ -308,7 +307,7 @@ def main():
 
         df_map = pd.read_csv(file, sep=";")
 
-        criteria = content.selectbox("Critère", df_map.columns)
+        criteria = content.selectbox("Critère", df_map.columns, index=1)
 
         show_map(df_map, content, criteria)
         show_stats(df_map, content)
