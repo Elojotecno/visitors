@@ -170,7 +170,6 @@ def show_map(df, container):
 
 def show_stats(df, container, criteria):
 
-    criteria = container.selectbox("Critère", df.columns)
     df = df.sort_values(by=criteria, ascending=True)
     container.data(df)
 
@@ -310,7 +309,9 @@ def main():
 
         df_map = pd.read_csv(file, sep=";")
 
-        show_map(df_map, content)
+        criteria = content.selectbox("Critère", df_map.columns)
+
+        show_map(df_map, content, criteria)
         show_stats(df_map, content)
 
     if sb_menu == "Analytics":
