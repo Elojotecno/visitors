@@ -186,23 +186,26 @@ def show_analytics(df, container):
     with container.container(border=False): 
 
         col1, col2, col3 = st.columns(3)
-        colpg1, colpg2 = st.columns(2)
+        col_pg1, col_pg2 = st.columns(2)
         col_hist1, col_hist2 = st.columns(2)
         
         visitor_count = df.shape[0]
-        col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
+        with st.container(border=1):
+            col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
 
         dept_count = df['dept'].nunique()
-        col2.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
+        with st.container(border=1):
+            col2.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
 
         dept_sales = df['sales'].nunique()
-        col3.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
+        with st.container(border=1):
+            col3.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
         
         fig_pg1, fig_pg2 = None, None
    
-        pie_graph(df, fig_pg1, colpg1, "dept", "dept", "Visiteurs par département")
+        pie_graph(df, fig_pg1, col_pg1, "dept", "dept", "Visiteurs par département")
 
-        hist_graph(df, fig_pg2, colpg2, "product", "product", "Types de projet")
+        hist_graph(df, fig_pg2, col_pg2, "product", "product", "Types de projet")
         
         fig_hist1, fig_hist2 = None, None
 
