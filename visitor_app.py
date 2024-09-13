@@ -307,9 +307,9 @@ def main():
 
         df_map = pd.read_csv(file, sep=";")
 
-        criteria = content.selectbox("Critère", df_map.columns, index=1)
-
         show_map(df_map, content)
+
+        criteria = content.selectbox("Critère", df_map.columns, index=1)
         show_stats(df_map, content, criteria)
 
     if sb_menu == "Analytics":
