@@ -171,7 +171,7 @@ def show_map(df, container):
 def show_stats(df, container, criteria="dept"):
 
     df = df.sort_values(by='dept', ascending=True)
-    container.dataframe(df.groupby(by=[criteria]))
+    container.dataframe(df.groupby(by=[criteria]).sum())
 
 
 def pie_graph(df, fig, wrapper, values, names, title, hole=.5):
