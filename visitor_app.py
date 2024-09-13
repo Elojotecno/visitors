@@ -41,10 +41,6 @@ def search_city(zip):
             noms_ville.append(info['nom'])
         return noms_ville
 
-    
-	    
-        
-
 def check_password(controller):
     
     def login_form():
@@ -79,7 +75,6 @@ def check_password(controller):
     if "password_correct" in st.session_state:
         st.error("😕 User not known or password incorrect")
     return False
-
 
 def add_visitor(file, data, container):
     
@@ -191,6 +186,8 @@ def show_analytics(df, container):
     with container.container(border=False): 
 
         col1, col2, col3 = st.columns(3)
+        colpg1, colpg2 = st.columns(2)
+        col_hist1, col_hist2 = st.columns(2)
         
         visitor_count = df.shape[0]
         col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
@@ -200,15 +197,14 @@ def show_analytics(df, container):
 
         dept_sales = df['sales'].nunique()
         col3.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
-
-        colpg1, colpg2 = st.columns(2)
+        
         fig_pg1, fig_pg2 = None, None
    
         pie_graph(df, fig_pg1, colpg1, "dept", "dept", "Visiteurs par département")
 
         hist_graph(df, fig_pg2, colpg2, "product", "product", "Types de projet")
         
-        col_hist1, col_hist2 = st.columns(2)
+        
         fig_hist1, fig_hist2 = None, None
 
         hist_graph(df, fig_hist1, col_hist1, "sales", "sales", "Visiteurs par SAM")
@@ -216,7 +212,6 @@ def show_analytics(df, container):
         hist_graph(df, fig_hist2, col_hist2, "date", None, "Visiteurs par date & heure")
 
  
-    
 def main():
         
     controller = CookieController()
@@ -258,7 +253,12 @@ def main():
             address = content.text_input('Adresse')
             zip = content.text_input('Code postal')
             dept = zip[:2]
-            liste_ville = search_city(zip)
+
+            if search_city(zip) is not None:
+                liste_ville = search_city(zip)
+            else:
+                list_ville = ["Pas de ville trouvée"]
+                
             city = content.select("Ville", liste_ville)
             mobile = content.text_input('Mobile')
             cows = content.text_input('Nb vaches laitières')
