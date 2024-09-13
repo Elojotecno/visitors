@@ -263,7 +263,7 @@ def main():
             submit = content.button('Valider')
 
             content.write("Règles sur le traitement de vos données à lire [ici](%s) " % terms_and_conditions_fj)
-            gdpr_agreed = content.checkbox("J'ai lu les conditions et j'accepte le traitement de mes données par FullwoodJoz.")
+            gdpr_agreed = content.checkbox("J'ai lu les conditions et j'accepte le traitement de mes données par FullwoodJoz.", value=True)
 
             if gdpr_agreed:
             
