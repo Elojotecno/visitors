@@ -309,7 +309,7 @@ def main():
 
         show_map(df_map, content)
 
-        criteria = content.selectbox("Critère", df_map.columns, index=1)
+        criteria = content.selectbox("Critère", df_map.columns, index=5)
         show_stats(df_map, content, criteria)
 
     if sb_menu == "Analytics":
