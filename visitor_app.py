@@ -186,16 +186,19 @@ def show_analytics(df, container):
         col1, col2, col3 = container.columns(3)
         
         visitor_count = df.shape[0]
-        with container.container(border=True):
-            col1.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
+        with col1:
+            with st.container(border=True):
+                st.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
 
         dept_count = df['dept'].nunique()
-        with container.container(border=True):
-            col2.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
+        with col2:
+            with st.container(border=True):
+                st.metric(label="Départements", value=dept_count, delta=None, help=None, label_visibility="visible")
 
         dept_sales = df['sales'].nunique()
-        with container.container(border=True):
-            col3.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
+        with col3:
+            with st.container(border=True):
+                st.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
         
         with container.container(border=True): 
 
