@@ -182,12 +182,6 @@ def hist_graph(df, fig, wrapper, x, color, title, use_container_width=True):
         wrapper.plotly_chart(fig, use_container_width=use_container_width)
 
 def show_analytics(df, container):
-
-    with container.container(border=True): 
-
-        col1, col2, col3 = st.columns(3)
-        col_pg1, col_pg2 = st.columns(2)
-        col_hist1, col_hist2 = st.columns(2)
         
         visitor_count = df.shape[0]
         with st.container(border=True):
@@ -201,17 +195,22 @@ def show_analytics(df, container):
         with st.container(border=True):
             col3.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
         
-        fig_pg1, fig_pg2 = None, None
-   
-        pie_graph(df, fig_pg1, col_pg1, "dept", "dept", "Visiteurs par département")
+        with container.container(border=True): 
 
-        hist_graph(df, fig_pg2, col_pg2, "product", "product", "Types de projet")
-        
-        fig_hist1, fig_hist2 = None, None
+            col1, col2, col3 = st.columns(3)
+            col_pg1, col_pg2 = st.columns(2)
+            col_hist1, col_hist2 = st.columns(2)
+            fig_pg1, fig_pg2 = None, None
+    
+            pie_graph(df, fig_pg1, col_pg1, "dept", "dept", "Visiteurs par département")
 
-        hist_graph(df, fig_hist1, col_hist1, "sales", "sales", "Visiteurs par SAM")
+            hist_graph(df, fig_pg2, col_pg2, "product", "product", "Types de projet")
+            
+            fig_hist1, fig_hist2 = None, None
 
-        hist_graph(df, fig_hist2, col_hist2, "date", None, "Visiteurs par date & heure")
+            hist_graph(df, fig_hist1, col_hist1, "sales", "sales", "Visiteurs par SAM")
+
+            hist_graph(df, fig_hist2, col_hist2, "date", None, "Visiteurs par date & heure")
 
  
 def main():
