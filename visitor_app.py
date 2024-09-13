@@ -268,12 +268,13 @@ def main():
             milking_eqt = content.selectbox("Equipement actuel", eqt_list)
             brand = content.selectbox("Marque actuelle", brand_list)
             product = content.multiselect("Intéressé par", prod_list)
-            submit = content.button('Valider')
 
             content.write("Règles sur le traitement de vos données à lire [ici](%s) " % terms_and_conditions_fj)
             gdpr_agreed = content.checkbox("J'ai lu les conditions et j'accepte le traitement de mes données par FullwoodJoz.", value=True)
 
             if gdpr_agreed:
+
+                submit = content.button('Valider')
             
                 if submit:                
     
