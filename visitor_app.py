@@ -182,6 +182,10 @@ def pie_graph(df, fig, wrapper, values, names, title, hole=.5):
         fig.update_traces(textposition='inside', textinfo='percent+label')
         wrapper.plotly_chart(fig)
 
+def hist_graph(df, fig, wrapper, x, color, title, use_container_width=True):
+        fig = px.histogram(df, x=x, color=color, title=title)
+        wrapper.plotly_chart(fig, use_container_width=use_container_width)
+
 def show_analytics(df, container):
 
     with container.container(border=False): 
@@ -198,20 +202,19 @@ def show_analytics(df, container):
         col3.metric(label="Donateurs", value=dept_sales, delta=None, help=None, label_visibility="visible")
 
         colpg1, colpg2 = st.columns(2)
-        figpg1, figpg2 = None
+        fig_pg1, fig_pg2 = None, None
    
-        pie_graph(df, figpg1, colpg1, "dept", "dept", "Visiteurs par département")
+        pie_graph(df, fig_pg1, colpg1, "dept", "dept", "Visiteurs par département")
 
-        pie_graph(df, figpg2, colpg2, "product", "product", "Types de projet")
+        pie_graph(df, fig_pg2, colpg2, "product", "product", "Types de projet")
         
+        col_hist1, col_hist2 = st.columns(2)
+        fig_hist1, fig_hist2 = None, None
 
-        col100, col200 = st.columns(2)
+        hist_graph(df, fig_hist1, col_hist1, "sales", "sales", "Visiteurs par SAM")
 
-        fig1 = px.histogram(df, x="sales", color='sales', title='Visiteurs par SAM')
-        col100.plotly_chart(fig1, use_container_width=True)
-    
-        fig2 = px.histogram(df, x="date", title='Visiteurs par date & heure')
-        col200.plotly_chart(fig2, use_container_width=True)
+        hist_graph(df, fig_hist2, col_hist2, "date", None, "Visiteurs par date & heure")
+
  
     
 def main():
