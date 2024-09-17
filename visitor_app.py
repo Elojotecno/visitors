@@ -369,18 +369,21 @@ def main():
         header.subheader("Téléchargements")
 
         key_index = 0
-        for f in os.listdir(data_dir):
 
-            if len(f) > 5:
+        with content.container(border=True):
+            
+            for f in os.listdir(data_dir):
 
-                link = data_dir + f
-                columns = content.columns(2)
+                if len(f) > 5:
 
-                columns[0].write(link)
+                    link = data_dir + f
+                    columns = content.columns(2)
 
-                with open(link) as f:
-                    columns[1].download_button('Télécharger le fichier CSV', f, key=key_index)
-                    key_index += 1
+                    columns[0].write(link)
+
+                    with open(link) as f:
+                        columns[1].download_button('Télécharger le fichier CSV', f, key=key_index)
+                        key_index += 1
 
     
 if __name__ == "__main__":
