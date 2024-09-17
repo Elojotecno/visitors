@@ -131,6 +131,8 @@ def show_map(df, container):
 
     # create the maps
 
+
+
     scope = 'europe'
     projection = 'natural earth'
     theme = 'plotly_dark'
@@ -168,7 +170,7 @@ def show_map(df, container):
     
     fig.update_traces(marker=dict(size=8,
                     symbol="circle",
-                    color="Cyan",
+                    color=df['sales'],
                     line=dict(width=2,
                     color='lightskyblue',
                     )),
@@ -447,6 +449,7 @@ def main():
 
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset 
             df_map = select_dataset(data_dir, content)
+
             # Check that dataset is not None and not empty
             map_check = check_df_status(df_map, content)
             
@@ -460,6 +463,7 @@ def main():
 
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset
             df_analytics = select_dataset(data_dir, content)
+
             # Check that dataset is not None and not empty
             data_check = check_df_status(df_analytics, content)
             
