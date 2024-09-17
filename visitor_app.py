@@ -76,8 +76,7 @@ def check_password(controller):
     # Show inputs for username + password.
     login_form()
     if "password_correct" in st.session_state:
-        st.write(st.sessions_state)
-        #st.error("😕 User not known or password incorrect")
+        st.error("😕 User not known or password incorrect")
     return False
 
 def add_visitor(file, data, container):
@@ -227,7 +226,7 @@ def main():
     user_cookie = controller.get('usr')
 
     if not check_password(controller):
-        st.write("Y'a un bug!")
+        st.write(st.sessions_state)
         #st.stop()
     
     st.write(f'Bienvenue {user_cookie}')
