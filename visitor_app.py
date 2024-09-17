@@ -200,6 +200,7 @@ def show_analytics(df, container):
         col1, col2, col3 = container.columns(3)
         
         visitor_count = df.shape[0]
+
         with col1:
             with st.container(border=True):
                 st.metric(label="Visiteurs", value=visitor_count, delta=None, help=None, label_visibility="visible")
@@ -350,11 +351,16 @@ def main():
             content.image(logo)
             header.subheader('Geomapping visiteurs')
 
-            df_map = pd.read_csv(db, sep=";")        
+            df_map = pd.read_csv(db, sep=";")
+            
+            # If empty dataset, reset map and data display
+            if df_map.shape[0] == 0:
+                disp_map = False
+                disp_data = False
 
             with st.sidebar:
-                display_map = st.checkbox("Afficher la carte", value=True)
-                display_data = st.checkbox("Afficher les données", value=False)
+                display_map = st.checkbox("Afficher la carte", value=disp_map)
+                display_data = st.checkbox("Afficher les données", value=disp_data)
             
             if display_map:
                 show_map(df_map, content)
