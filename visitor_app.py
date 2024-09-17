@@ -335,11 +335,11 @@ def main():
 
         header.subheader('Geomapping visiteurs')
 
-        df_map = pd.read_csv(db.loc[:,2:], sep=";")
+        df_map = pd.read_csv(db, sep=";")
 
-        show_map(df_map, content)
+        show_map(df_map.iloc[:, 1:], content)
 
-        criteria = content.selectbox("Critère", df_map.columns[1:4], index=5)
+        criteria = content.selectbox("Critère", df_map.columns[1:], index=5)
         show_data(df_map, content, criteria)
 
     if sb_menu == menu_options[2]:
