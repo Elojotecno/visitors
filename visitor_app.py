@@ -58,11 +58,13 @@ lst_colors = ["aliceblue", "blueviolet", "cornflowerblue",
 "palevioletred", "papayawhip", "peachpuff", "peru", "pink",
 "plum", "powderblue", "purple", "red", "skyblue",
 "tomato", "violet", "whitesmoke", "yellow", "yellowgreen"]
-map_options = ['sales', 'dept', 'eqt', 'product']
+
                
 st.set_page_config(layout="wide")
 
 def legend_layout(df, content, column, max_cols, colors, options_type):
+
+    # Create a map legend layout showing selected items and associated color
 
     with content.container(border=False):
 
@@ -89,6 +91,8 @@ def legend_layout(df, content, column, max_cols, colors, options_type):
                         
 def color_picker(df, column, content):
 
+    # Assign a color to each selected column item
+
     options_type = content.multiselect("Pick up one or more categories", list(df[column].unique()), list(df[column].unique()), key="cat")
     colors={}
 
@@ -106,8 +110,6 @@ def color_picker(df, column, content):
                 
             # Assign color index for markers
             df['color']= df[column].apply(lambda x: colors[x])
-
-            content.dataframe(df['color'])
         
         return df
 
@@ -515,6 +517,7 @@ def main():
             map_check = check_df_status(df_map, content)
             
             if map_check == True:
+                map_options = ['sales', 'dept', 'eqt', 'product']
                 feature = content.selectbox("Pick up one category", map_options, index=0)
                 df_map = color_picker(df_map, feature, content)
                 show_map(df_map, content)              
