@@ -50,13 +50,13 @@ def check_password(controller):
         login_container = st.container(border=False)
         
         with st.form("Credentials"):
-            st.selectbox("Utilisateur", ("FullwoodJoz", "Transfaire"), on_change=logo_(login_container), key="username")
-            
+            st.selectbox("Utilisateur", ("FullwoodJoz", "Transfaire"), key="username")
+            logo_(login_container, st.session_state["username"])
             st.text_input("Mot de passe", type="password", key="password")
             st.form_submit_button("Log in", on_click=password_entered)
     
-    def logo_(container):
-        container.image(user_logo[st.session_state["username"]])
+    def logo_(container, user_name):
+        container.image(user_logo[user_name])
         
 
     def password_entered():
