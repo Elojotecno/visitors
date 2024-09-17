@@ -376,7 +376,7 @@ def main():
                 columns = st.columns(2)
                 link = data_dir + f
                 columns[0].write(link)
-                columns[1].download_button(label="Download data as CSV", data=pd.read_csv(link; sep=";"), file_name=f, mime="text/csv")
+                columns[1].download_button(label="Télécharger le fichier", data=pd.read_csv(link, sep=";"), file_name=f, mime="text/csv")
                 
     
 if __name__ == "__main__":
