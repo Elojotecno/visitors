@@ -379,7 +379,7 @@ def main():
                 columns[0].write(link)
 
                 with open(link) as f:
-                    columns[1].download_button('Télécharger le fichier CSV', file_name = f, key=key_index)
+                    columns[1].download_button('Télécharger le fichier CSV', f, key=key_index)
                     key_index += 1
 
     
