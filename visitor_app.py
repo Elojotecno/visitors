@@ -106,10 +106,10 @@ def color_picker(df, column, content):
                 #Create color selectbox per type
                 colors[option] = st.selectbox(str(option), lst_colors, index=index, key = option)
 
-        if len(colors) != 0:  
+            if len(colors) != 0:  
 
-            # Create a legend layout showing markers color
-            legend_layout(df, content, column, len(list(df[column].unique())), colors, options_type)
+                # Create a legend layout showing markers color
+                legend_layout(df, content, column, len(list(df[column].unique())), colors, options_type)
                 
             # Assign color index to markers and create a new column in dataset
             df['color']= df[column].apply(lambda x: colors[x])
