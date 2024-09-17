@@ -345,7 +345,7 @@ def main():
             show_map(df_map, content)
 
         if display_data:
-            criteria = content.selectbox("Critère", df_map.columns, index=5)
+            criteria = content.selectbox("Critère", df_map.columns, index=0)
             show_data(df_map, content, criteria)
 
     if sb_menu == menu_options[2]:
