@@ -374,6 +374,9 @@ def main():
             if df_map.shape[0] == 0:
                 disable_map = False
                 disable_data = False
+            else:
+                disable_map = True
+                disable_data = True
            
             with st.sidebar:
                 display_map = st.checkbox("Afficher la carte", value=False, disabled=disable_map)
