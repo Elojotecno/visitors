@@ -277,13 +277,13 @@ def check_df_status(df, container):
 
         if df.shape[0] == 0:
             result = False
-            result = container.write("😕 Pas de données disponible.")
+            result = container.info("😕 Pas de données disponible.")
         else:
             result = True
     
     else:
         result = False
-        result = container.write("😕 Pas de données disponible.")
+        result = container.info("😕 Pas de données disponible.")
     
     return result
 
