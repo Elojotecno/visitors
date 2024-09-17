@@ -380,7 +380,7 @@ def main():
 
             # search datasets in dir and put them in a selectbox
             datasets = listdir(data_dir)
-            
+
             df_map = None
 
             if len(datasets) !=0:
@@ -402,10 +402,14 @@ def main():
                                 df_map = pd.concat([empty, new], ignore_index=True)
                             else:
                                 df_map = pd.concat([df_map, new], ignore_index=True)
-                            
+                    
                     else:
                         master_dataset = data_dir + selected_data
                         df_map = pd.read_csv(master_dataset, sep=";")
+                            
+                else:
+                    master_dataset = data_dir + selected_data
+                    df_map = pd.read_csv(master_dataset, sep=";")
             
             # If empty dataset, reset map and data display
             if (df_map is not None) and (df_map.shape[0] == 0):
