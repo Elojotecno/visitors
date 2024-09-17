@@ -370,14 +370,14 @@ def main():
 
         index = 0
         for f in os.listdir(data_dir):
-
+            st.write(data_dir + f)
             if os.path.isfile(f):
 
                 columns = st.columns(2)
                 link = data_dir + f
                 columns[0].write(link)
                 columns[1].download_button(label="Télécharger le fichier", data=pd.read_csv(link, sep=";"), file_name=f, mime="text/csv")
-                
+                index += 2
     
 if __name__ == "__main__":
     main()    
