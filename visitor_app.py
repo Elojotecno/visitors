@@ -245,7 +245,7 @@ def main():
 
     # Create logo and user dataset according to the user
     if user_cookie is not None:
-        
+
         logo = user_logo[user_cookie]
         db = user_db[user_cookie]
 
@@ -269,7 +269,7 @@ def main():
             sb_menu = option_menu('Menu', 
                                             menu_options_admin, 
                                             icons=menu_icon_admin, 
-                                            menu_icon='cast', default_index=0, orientation="horizontal")
+                                            menu_icon='cast', default_index=0, orientation="vertical")
         else:
 
             sb_menu = option_menu('Menu', 
