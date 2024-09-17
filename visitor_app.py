@@ -380,6 +380,8 @@ def main():
 
             # search datasets in dir and put them in a selectbox
             datasets = listdir(data_dir)
+            
+            df_map = None
 
             if len(datasets) !=0:
                 datasets.append("All")
@@ -390,7 +392,6 @@ def main():
 
                     if len(datasets[:-1]) > 1:
 
-                        df_map = None
                         empty = pd.DataFrame([empty_data])
 
                         for dataset in datasets[:-1]:
