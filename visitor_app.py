@@ -46,19 +46,12 @@ def search_city(zip):
 def check_password(controller):
     
     def login_form():
-
-        login_container = st.container(border=False)
         
         with st.form("Credentials"):
             st.selectbox("Utilisateur", ("FullwoodJoz", "Transfaire"), key="username")
-            logo_(login_container, st.session_state["username"])
             st.text_input("Mot de passe", type="password", key="password")
             st.form_submit_button("Log in", on_click=password_entered)
-    
-    def logo_(container, user_name):
-        container.image(user_logo[user_name])
         
-
     def password_entered():
 
         controller.set('usr', st.session_state["username"])
