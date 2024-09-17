@@ -366,7 +366,7 @@ def main():
 
             if len(datasets) !=0:
                 datasets.append("All")
-                selected_data = st.sidebar.selectbox("Base de données", datasets, datasets[0])          
+                selected_data = st.sidebar.selectbox("Données", datasets, index=0)          
                 master_dataset = data_dir + selected_data
                 df_map = pd.read_csv(master_dataset, sep=";")
             
