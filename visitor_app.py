@@ -368,13 +368,15 @@ def main():
 
         header.subheader("Téléchargements")
 
+        key_index = 0
         for f in os.listdir(data_dir):
 
             if len(f) > 5:
                 link = data_dir + f
                 content.write(link)
                 with open(link) as f:
-                    content.download_button('Download CSV', f, 'text/csv', key=f[:5])
+                    content.download_button('Download CSV', f, 'text/csv', key=key_index)
+                    key_index += 1
 
     
 if __name__ == "__main__":
