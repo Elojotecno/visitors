@@ -372,7 +372,9 @@ def main():
 
             link = data_dir + f
             content.write(link)
-            content.download_button(label="Télécharger le fichier", data=pd.read_csv(link, sep=";"), file_name=f, mime="text/csv")
+
+            with open(link) as f:
+                content.download_button('Download CSV', f)
 
     
 if __name__ == "__main__":
