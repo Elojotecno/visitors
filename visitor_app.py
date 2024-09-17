@@ -336,6 +336,8 @@ def main():
         header.subheader('Geomapping visiteurs')
 
         df_map = pd.read_csv(db, sep=";")
+        with content.expander("Base de données"):
+            st.dataframe(df_map)
 
         with st.sidebar:
             display_map = st.checkbox("Afficher la carte")
