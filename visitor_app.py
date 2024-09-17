@@ -343,7 +343,8 @@ def main():
 
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")             
 
-    if len(menu_options) > 1:
+    if user_cookie == "Admin":
+        
         if sb_menu == menu_options[1]:
 
             content.image(logo)
