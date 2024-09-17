@@ -267,6 +267,27 @@ def make_filepath(dir, file):
 
     return filepath
 
+def check_df_status(df, content):
+
+    result= False
+
+    if df is not None:
+
+        result = True
+
+        if df.shape[0] == 0:
+            result = False
+            result = content.write("😕 Pas de données disponible.")
+        else:
+            result = True
+    
+    else:
+        result = False
+        result = content.write("😕 Pas de données disponible.")
+    
+    return result
+
+
 def select_dataset(data_dir, content, instr_all="Fusionner"):
 
     # search datasets in directory and put them in a selectbox
@@ -302,7 +323,6 @@ def select_dataset(data_dir, content, instr_all="Fusionner"):
             df_ = pd.read_csv(master_dataset, sep=";")
 
     return df_
-
 
 def main():
         
@@ -424,11 +444,11 @@ def main():
 
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset 
             df_map = select_dataset(data_dir, content)
+            # Check that dataset is not None and not empty
+            map_check = check_df_status(df_map)
             
-            if df_map is not None:
-                show_map(df_map, content)
-            else:
-                content.write("😕 Pas de données disponible.")
+            if map_check == True:
+                show_map(df_map, content)              
 
 
         if sb_menu == menu_options_admin[2]:
@@ -438,11 +458,12 @@ def main():
 
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset
             df_analytics = select_dataset(data_dir, content)
-
-            if df_analytics is not None:
+            # Check that dataset is not None and not empty
+            data_check = check_df_status(df_map)
+            
+            if data_check == True:
                 show_analytics(df_analytics, content)
-            else:
-                content.write("😕 Pas de données disponible.")
+            
         
         if sb_menu == menu_options_admin[3]:
 
