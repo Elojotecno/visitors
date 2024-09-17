@@ -62,9 +62,7 @@ map_options = ['sales', 'dept', 'eqt', 'product']
                
 st.set_page_config(layout="wide")
 
-def legend_layout(df, content, max_cols, colors, options_type):
-
-    import webcolors
+def legend_layout(df, content, column, max_cols, colors, options_type):
 
     with content.container(border=False):
 
@@ -86,7 +84,7 @@ def legend_layout(df, content, max_cols, colors, options_type):
                     with columns[index+1]:
     
                         #Create color legend tile
-                        legend = f"{str(len(df[df['type'] == option]['name']))} {option}"
+                        legend = f"{str(len(df[df[column] == option]['name']))} {option}"
                         st.color_picker(legend, webcolors.name_to_hex(colors[option]), key="color_picker_"+str(index)+str(row), disabled=False)
                         
 def color_picker(df, column, content):
@@ -104,7 +102,7 @@ def color_picker(df, column, content):
 
         if len(colors) != 0:  
 
-            legend_layout(df, content, len(list(df[column].unique())), colors, options_type)
+            legend_layout(df, content, column, len(list(df[column].unique())), colors, options_type)
                 
             # Assign color index for markers
             df['color']= df["type"].apply(lambda x: colors[x])
