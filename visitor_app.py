@@ -89,7 +89,7 @@ def add_visitor(file, data, container):
     if os.path.isfile(file):
         df = pd.read_csv(file, sep=";")
         df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
-        container.dataframe(df)
+        container.dataframe(pd.DataFrame([data]))
         df.to_csv(file, sep=";", index=False)
    
     container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées dans {file} le {data['date'].split(',')[0]} à {data['date'].split(',')[1]}.", icon="ℹ️")
@@ -326,8 +326,7 @@ def main():
                             'lon':lon,
                             }
                         
-                        add_visitor(db, data_dict, content)
-                        
+                        add_visitor(db, data_dict, content)       
             else:
 
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")             
@@ -346,7 +345,7 @@ def main():
             show_map(df_map, content)
 
         if display_data:
-            criteria = content.selectbox("Critère", df_map.columns, index=5)
+            criteria = content.selectbox("Critère", df_map.columns, index=0)
             show_data(df_map, content, criteria)
 
     if sb_menu == menu_options[2]:
