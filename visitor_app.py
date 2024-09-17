@@ -337,6 +337,8 @@ def main():
 
         df_map = pd.read_csv(db, sep=";")
 
+        content.image(logo)
+
         with content.expander(f"Base de données: {user_db[user_cookie]}"):
             st.dataframe(df_map)
 
@@ -356,6 +358,8 @@ def main():
         header.subheader('Statistiques visiteurs')
 
         df_analytics = pd.read_csv(db, sep=";")
+
+        content.image(logo)
 
         show_analytics(df_analytics, content)
        
