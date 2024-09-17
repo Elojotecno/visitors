@@ -375,11 +375,11 @@ def main():
 
                 link = data_dir + f
                 columns = content.columns(2)
-                
+
                 columns[0].write(link)
 
                 with open(link) as f:
-                    columns[1].download_button('Download CSV', f, key=key_index)
+                    columns[1].download_button('Download CSV', f, 'text/csv', key=key_index)
                     key_index += 1
 
     
