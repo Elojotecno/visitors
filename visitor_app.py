@@ -23,8 +23,8 @@ users_list = {"FullwoodJoz" : ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia'
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
 eqt_list = ['TPA', 'Epi', 'Roto', 'Robot', 'Autre']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Autre']
-user_db = {"FullwoodJoz" : "./data/fj_visitors.csv", "Transfaire" : "./data/trf_visitors.csv"}
-user_logo = {"FullwoodJoz" : "./img/fjm.png", "Transfaire" : "./img/transfaire.png"}
+user_db = {"FullwoodJoz" : "./data/fj_visitors.csv", "Transfaire" : "./data/trf_visitors.csv", "Admin" : "./data/fj_visitors.csv"}
+user_logo = {"FullwoodJoz" : "./img/fjm.png", "Transfaire" : "./img/transfaire.png", "Admin" : "./img/fjm.png"}
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 data_dir= './data/'
 
