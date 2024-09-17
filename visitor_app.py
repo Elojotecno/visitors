@@ -108,6 +108,8 @@ def color_picker(df, column, content):
             df['color']= df[column].apply(lambda x: colors[x])
 
             content.dataframe(df['color'])
+        
+        return df
 
 def add_header_content(header_id, logo, title):
 
@@ -514,7 +516,7 @@ def main():
             
             if map_check == True:
                 feature = content.selectbox("Pick up one category", map_options, index=0)
-                color_picker(df_map, feature, content)
+                df_map = color_picker(df_map, feature, content)
                 show_map(df_map, content)              
 
 
