@@ -102,7 +102,7 @@ def color_picker(df, column, content):
         for index, option in enumerate(options_type):
             
             #Create color selectbox per type
-            with content.expander("Color settings", expanded=False, icon=":material/icon_name:"):
+            with content.expander("Color settings", expanded=False, icon=":material/waving_hand:"):
                 colors[option] = content.selectbox(str(option), lst_colors, index=index, key = option)
 
         if len(colors) != 0:  
