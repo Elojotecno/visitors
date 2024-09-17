@@ -15,6 +15,7 @@ import json
 import urllib.request
 
 menu_options = ['Nouveau visiteur', 'Carte', 'Données']
+users_list = {"FullwoodJoz" : ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'], "Transfaire" : ["Transfaire"]}
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
 eqt_list = ['TPA', 'Epi', 'Roto', 'Robot', 'Autre']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Autre']
@@ -76,7 +77,7 @@ def check_password(controller):
     login_form()
     if "password_correct" in st.session_state:
         st.write(st.sessions_state)
-        st.error("😕 User not known or password incorrect")
+        #st.error("😕 User not known or password incorrect")
     return False
 
 def add_visitor(file, data, container):
@@ -257,7 +258,7 @@ def main():
         header.image(logo ,width=141)
         header.subheader('Nouveau Visiteur')
 
-        sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'])
+        sam = content.selectbox("SAM", users_list[user_cookie])
 
         if sam != "...":
 
