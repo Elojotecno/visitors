@@ -1,4 +1,3 @@
 [theme]
-primaryColor="#0096CF"
-textColor="#31333F"
-font="sans serif"
+base="dark"
+primaryColor="purple"
