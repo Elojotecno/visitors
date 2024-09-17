@@ -247,7 +247,7 @@ def main():
         st.image(logo, width=141)
 
         sb_menu = option_menu('Menu', 
-                                        ['Add visitor', 'Map', 'Analytics'], 
+                                        ['Nouveau visiteur', 'Carte', 'Données'], 
                                         icons=['folder-symlink', 'map', 'activity'], 
                                         menu_icon='cast', default_index=0)
 
