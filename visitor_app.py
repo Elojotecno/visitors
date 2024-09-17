@@ -23,7 +23,7 @@ brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Le
 user_db = {"FullwoodJoz" : "./data/fj_visitors.csv", "Transfaire" : "./data/trf_visitors.csv"}
 user_logo = {"FullwoodJoz" : "./img/fjm.png", "Transfaire" : "./img/transfaire.png"}
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
-data_dir= './data'
+data_dir= './data/'
 
 
 st.set_page_config(layout="wide")
