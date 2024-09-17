@@ -48,6 +48,11 @@ empty_data = {
 
 st.set_page_config(layout="wide")
 
+def add_header_content(header_id, logo, title):
+
+    header_id.image(logo)
+    header_id.subheader(title)
+     
 def search_city(zip):
 
     noms_ville = []
@@ -287,7 +292,6 @@ def check_df_status(df, container):
     
     return result
 
-
 def select_dataset(data_dir, content, instr_all="Fusionner"):
 
     # search datasets in directory and put them in a selectbox
@@ -372,8 +376,8 @@ def main():
 
     if sb_menu == menu_options[0]:
 
-        header.image(logo)
-        header.subheader('Nouveau Visiteur')
+    
+        add_header_content(header, logo, 'Nouveau visiteur')
 
         sam = content.selectbox("SAM", users_list[user_cookie])
 
@@ -439,8 +443,7 @@ def main():
 
         if sb_menu == menu_options_admin[1]:
 
-            header.image(logo)
-            header.subheader('Geomapping visiteurs')
+            add_header_content(header, logo, 'Geomapping visiteurs')
 
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset 
             df_map = select_dataset(data_dir, content)
@@ -453,8 +456,7 @@ def main():
 
         if sb_menu == menu_options_admin[2]:
 
-            header.image(logo)
-            header.subheader('Statistiques visiteurs')
+            add_header_content(header, logo, 'Statistiques visiteurs')
 
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset
             df_analytics = select_dataset(data_dir, content)
@@ -467,8 +469,7 @@ def main():
         
         if sb_menu == menu_options_admin[3]:
 
-            header.image(logo)
-            header.subheader("Téléchargements")
+            add_header_content(header, logo, 'Téléchargements')
 
             key_index = 0
 
@@ -478,7 +479,7 @@ def main():
 
                     if len(f) > 5:
 
-                        link = data_dir + f
+                        link = make_filepath(data_dir, f)
                         columns = st.columns(2)
 
                         columns[0].write(link)
