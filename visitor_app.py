@@ -369,11 +369,10 @@ def main():
         header.subheader("Téléchargements")
 
         for f in os.listdir(data_dir):
+            link = data_dir + f
+            content.link_button(f, link)
 
             if os.path.isfile(f):
-                
-                link = data_dir + f
-                content.write(link)
 
                 with open(link) as f:
                     content.download_button('Download CSV', f)
