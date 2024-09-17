@@ -50,7 +50,7 @@ def check_password(controller):
     def login_form():
         
         with st.form("Credentials"):
-            st.text_input("Utilisateur", key="username")
+            st.selectbox("Utilisateur", ["FullwoodJoz", "Transfaire"], key="username")
             st.text_input("Mot de passe", type="password", key="password")
             st.form_submit_button("Valider", on_click=password_entered)
         
@@ -246,7 +246,7 @@ def main():
 
     with st.sidebar:
 
-        st.image(logo, width=141)
+        st.image(logo)
 
         sb_menu = option_menu('Menu', 
                                         menu_options, 
@@ -255,7 +255,7 @@ def main():
 
     if sb_menu == menu_options[0]:
 
-        header.image(logo ,width=141)
+        header.image(logo)
         header.subheader('Nouveau Visiteur')
 
         sam = content.selectbox("SAM", users_list[user_cookie])
