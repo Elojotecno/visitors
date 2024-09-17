@@ -48,7 +48,7 @@ def check_password(controller):
     def login_form():
         
         with st.form("Credentials"):
-            st.selectbox("Utilisateur", ("FullwoodJoz", "Transfaire"), key="username")
+            st.text_input("Utilisateur", key="username")
             st.text_input("Mot de passe", type="password", key="password")
             st.form_submit_button("Log in", on_click=password_entered)
         
