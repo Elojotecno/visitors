@@ -369,13 +369,11 @@ def main():
         header.subheader("Téléchargements")
 
         for f in os.listdir(data_dir):
-            
-            if os.path.isfile(f):
-                link = data_dir + f
-                st.write(link)
-                st.download_button(label="Télécharger le fichier", data=pd.read_csv(link, sep=";"), file_name=f, mime="text/csv")
-                
-                index += 2
+
+            link = data_dir + f
+            content.write(link)
+            content.download_button(label="Télécharger le fichier", data=pd.read_csv(link, sep=";"), file_name=f, mime="text/csv")
+
     
 if __name__ == "__main__":
     main()    
