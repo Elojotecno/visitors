@@ -216,7 +216,6 @@ def show_analytics(df, container):
             hist_graph(df, fig_hist1, col_hist1, "sales", "sales", "Visiteurs par SAM")
 
             hist_graph(df, fig_hist2, col_hist2, "date", None, "Visiteurs par date & heure")
-
  
 def main():
         
@@ -238,7 +237,12 @@ def main():
 
     with st.sidebar:
 
-        st.image('img/fjm.png')
+        if user_cookie == "Transfaire":
+            logo = 'img/transfaire.png'
+        else:
+            logo = 'img/fjm.png'
+
+        st.image(logo, width=141)
 
         sb_menu = option_menu('Menu', 
                                         ['Add visitor', 'Map', 'Analytics'], 
@@ -247,7 +251,7 @@ def main():
 
     if sb_menu == "Add visitor":
 
-        header.image('img/fjm.png')
+        header.image(logo ,width=141)
         header.subheader('Nouveau Visiteur')
 
         sam = content.selectbox("SAM", ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'])
