@@ -14,6 +14,7 @@ import datetime
 import json
 import urllib.request
 
+menu_options = ['Nouveau visiteur', 'Carte', 'Données']
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
 eqt_list = ['TPA', 'Epi', 'Roto', 'Robot', 'Autre']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Autre']
@@ -247,11 +248,11 @@ def main():
         st.image(logo, width=141)
 
         sb_menu = option_menu('Menu', 
-                                        ['Nouveau visiteur', 'Carte', 'Données'], 
+                                        menu_options, 
                                         icons=['folder-symlink', 'map', 'activity'], 
                                         menu_icon='cast', default_index=0)
 
-    if sb_menu == "Add visitor":
+    if sb_menu == menu_options[0]:
 
         header.image(logo ,width=141)
         header.subheader('Nouveau Visiteur')
@@ -316,7 +317,7 @@ def main():
 
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")             
 
-    if sb_menu == "Map":
+    if sb_menu == menu_options[1]:
 
         header.subheader('Geomapping visiteurs')
 
@@ -327,7 +328,7 @@ def main():
         criteria = content.selectbox("Critère", df_map.columns, index=5)
         show_stats(df_map, content, criteria)
 
-    if sb_menu == "Analytics":
+    if sb_menu == menu_options[2]:
 
         header.subheader('Statistiques visiteurs')
 
