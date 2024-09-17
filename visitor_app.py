@@ -407,7 +407,7 @@ def main():
                         df_map = pd.read_csv(master_dataset, sep=";")
             
             # If empty dataset, reset map and data display
-            if df_map.shape[0] == 0:
+            if (df_map is not None) and (df_map.shape[0] == 0):
                 disable_map = True
                 disable_data = True
                 val_map = False
