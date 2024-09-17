@@ -370,11 +370,13 @@ def main():
 
         for f in os.listdir(data_dir):
 
-            link = data_dir + f
-            content.write(link)
+            if os.path.isfile(f):
+                
+                link = data_dir + f
+                content.write(link)
 
-            with open(link) as f:
-                content.download_button('Download CSV', f)
+                with open(link) as f:
+                    content.download_button('Download CSV', f)
 
     
 if __name__ == "__main__":
