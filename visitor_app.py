@@ -344,8 +344,8 @@ def main():
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")             
 
     if user_cookie == "Admin":
-        
-        if sb_menu == menu_options[1]:
+
+        if sb_menu == menu_options_admin[1]:
 
             content.image(logo)
             header.subheader('Geomapping visiteurs')
@@ -366,7 +366,7 @@ def main():
                 criteria = content.selectbox("Critère", df_map.columns, index=0)
                 show_data(df_map, content, criteria)
 
-        if sb_menu == menu_options[2]:
+        if sb_menu == menu_options_admin[2]:
 
             content.image(logo)
             header.subheader('Statistiques visiteurs')
@@ -375,7 +375,7 @@ def main():
 
             show_analytics(df_analytics, content)
         
-        if sb_menu == menu_options[3]:
+        if sb_menu == menu_options_admin[3]:
 
             content.image(logo)
             header.subheader("Téléchargements")
