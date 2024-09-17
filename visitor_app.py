@@ -65,7 +65,7 @@ def check_password(controller):
 
             else:
                 st.session_state["password_correct"] = False
-                st.write(st.sessions_state)
+                
 
     # Return True if the username + password is validated.
     if st.session_state.get("password_correct", False):
@@ -74,6 +74,7 @@ def check_password(controller):
     # Show inputs for username + password.
     login_form()
     if "password_correct" in st.session_state:
+        st.write(st.sessions_state)
         st.error("😕 User not known or password incorrect")
     return False
 
