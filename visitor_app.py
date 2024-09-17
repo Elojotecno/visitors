@@ -427,6 +427,8 @@ def main():
             
             if df_map is not None:
                 show_map(df_map, content)
+            else:
+                content.write("😕 Pas de données disponible.")
 
 
         if sb_menu == menu_options_admin[2]:
@@ -439,6 +441,8 @@ def main():
 
             if df_analytics is not None:
                 show_analytics(df_analytics, content)
+            else:
+                content.write("😕 Pas de données disponible.")
         
         if sb_menu == menu_options_admin[3]:
 
