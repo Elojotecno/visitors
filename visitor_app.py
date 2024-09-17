@@ -374,13 +374,17 @@ def main():
             if df_map.shape[0] == 0:
                 disable_map = True
                 disable_data = True
+                val_map = False
+                val_data = False
             else:
                 disable_map = False
                 disable_data = False
+                val_map = True
+                val_data = True
            
             with st.sidebar:
-                display_map = st.checkbox("Afficher la carte", value=False, disabled=disable_map)
-                display_data = st.checkbox("Afficher les données", value=False, disabled=disable_data)
+                display_map = st.checkbox("Afficher la carte", value=val_map, disabled=disable_map)
+                display_data = st.checkbox("Afficher les données", value=val_data, disabled=disable_data)
             
             if display_map:
                 show_map(df_map, content)
