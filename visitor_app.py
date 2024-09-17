@@ -27,6 +27,23 @@ user_db = {"FullwoodJoz" : "./data/fj_visitors.csv", "Transfaire" : "./data/trf_
 user_logo = {"FullwoodJoz" : "./img/fjm.png", "Transfaire" : "./img/transfaire.png", "Admin" : "./img/fjm.png"}
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 data_dir= './data/'
+empty_data = {
+                            'date' : None,
+                            'sales' : None,
+                            'farm': None,
+                            'name': None,
+                            'address': None,
+                            'zip': None,
+                            'dept': None,
+                            'city': None,
+                            'mobile': None,
+                            'cows': None,
+                            'eqt': None,
+                            'brand': None,
+                            'product': None,
+                            'lat':None,
+                            'lon':None,
+                            }
 
 
 st.set_page_config(layout="wide")
@@ -367,8 +384,27 @@ def main():
             if len(datasets) !=0:
                 datasets.append("All")
                 selected_data = st.sidebar.selectbox("Données", datasets, index=0)          
-                master_dataset = data_dir + selected_data
-                df_map = pd.read_csv(master_dataset, sep=";")
+                
+
+                if selected_data == "All":
+
+                    if len(datasets[:-1]) > 1:
+
+                        df_map = None
+                        empty = pd.DataFrame([empty_data])
+
+                        for dataset in datasets[:-1]:
+                            
+                            new = pd.read_csv(data_dir + dataset, sep=";")
+
+                            if df_map.shape[0] == 0:
+                                df_map = pd.concat([empty, new], ignore_index=True)
+                            else:
+                                df_map = pd.concat([df_map, new], ignore_index=True)
+                            
+                    else:
+                        master_dataset = data_dir + selected_data
+                        df_map = pd.read_csv(master_dataset, sep=";")
             
             # If empty dataset, reset map and data display
             if df_map.shape[0] == 0:
