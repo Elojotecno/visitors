@@ -370,7 +370,7 @@ def main():
 
         for f in os.listdir(data_dir):
 
-            if not os.isdir(f):
+            if not os.path.isdir(f):
                 link = data_dir + f
                 content.link_button(f, link)
 
