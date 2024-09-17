@@ -225,7 +225,8 @@ def main():
     user_cookie = controller.get('usr')
 
     if not check_password(controller):
-        st.stop()
+        st.write("Y'a un bug!")
+        #st.stop()
     
     st.write(f'Bienvenue {user_cookie}')
 
