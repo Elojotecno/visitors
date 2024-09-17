@@ -15,8 +15,11 @@ import json
 import urllib.request
 import os.path
 
-menu_options = ['Nouveau visiteur', 'Carte', 'Données', 'Téléchargements']
-users_list = {"FullwoodJoz" : ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'], "Transfaire" : ["Transfaire"]}
+menu_options = ['Nouveau visiteur']
+menu_options_admin = ['Nouveau visiteur', 'Carte', 'Données', 'Téléchargements']
+menu_icon = ['folder-symlink']
+menu_icon_admin = ['folder-symlink', 'map', 'activity', 'download']
+users_list = {"FullwoodJoz" : ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie'], "Transfaire" : ["Transfaire"], "Admin" : ["Admin"]}
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
 eqt_list = ['TPA', 'Epi', 'Roto', 'Robot', 'Autre']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Autre']
@@ -52,7 +55,7 @@ def check_password(controller):
     def login_form():
         
         with st.form("Credentials"):
-            st.selectbox("Utilisateur", ["FullwoodJoz", "Transfaire"], key="username")
+            st.selectbox("Utilisateur", ["FullwoodJoz", "Transfaire", "Admin"], key="username")
             st.text_input("Mot de passe", type="password", key="password")
             st.form_submit_button("Valider", on_click=password_entered)
         
@@ -241,7 +244,7 @@ def main():
     #st.write(f'{user_cookie}')
 
     # Create logo and user dataset according to the user
-    if user_cookie is not None:
+    if (user_cookie is not None) and (user_cookie != "Admin"):
         logo = user_logo[user_cookie]
         db = user_db[user_cookie]
 
@@ -260,12 +263,19 @@ def main():
     # Menu sidebar
     with st.sidebar:
 
-        #st.image(logo)
+        if user_cookie == "Admin":
 
-        sb_menu = option_menu('Menu', 
-                                        menu_options, 
-                                        icons=['folder-symlink', 'map', 'activity'], 
-                                        menu_icon='cast', default_index=0)
+            sb_menu = option_menu('Menu', 
+                                            menu_options_admin, 
+                                            icons=menu_icon_admin, 
+                                            menu_icon='cast', default_index=0, orientation="horizontal")
+        else:
+
+            sb_menu = option_menu('Menu', 
+                                            menu_options, 
+                                            icons=menu_icon, 
+                                            menu_icon='cast', default_index=0, orientation="vertical")
+
 
     if sb_menu == menu_options[0]:
 
@@ -332,57 +342,58 @@ def main():
 
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")             
 
-    if sb_menu == menu_options[1]:
+    if len(menu_options) > 1:
+        if sb_menu == menu_options[1]:
 
-        content.image(logo)
-        header.subheader('Geomapping visiteurs')
+            content.image(logo)
+            header.subheader('Geomapping visiteurs')
 
-        df_map = pd.read_csv(db, sep=";")        
+            df_map = pd.read_csv(db, sep=";")        
 
-        with content.expander(f"Base de données: {user_db[user_cookie]}"):
-            st.dataframe(df_map)
+            with content.expander(f"Base de données: {user_db[user_cookie]}"):
+                st.dataframe(df_map)
 
-        with st.sidebar:
-            display_map = st.checkbox("Afficher la carte")
-            display_data = st.checkbox("Afficher les données")
+            with st.sidebar:
+                display_map = st.checkbox("Afficher la carte")
+                display_data = st.checkbox("Afficher les données")
+            
+            if display_map:
+                show_map(df_map, content)
+
+            if display_data:
+                criteria = content.selectbox("Critère", df_map.columns, index=0)
+                show_data(df_map, content, criteria)
+
+        if sb_menu == menu_options[2]:
+
+            content.image(logo)
+            header.subheader('Statistiques visiteurs')
+
+            df_analytics = pd.read_csv(db, sep=";")
+
+            show_analytics(df_analytics, content)
         
-        if display_map:
-            show_map(df_map, content)
+        if sb_menu == menu_options[3]:
 
-        if display_data:
-            criteria = content.selectbox("Critère", df_map.columns, index=0)
-            show_data(df_map, content, criteria)
+            content.image(logo)
+            header.subheader("Téléchargements")
 
-    if sb_menu == menu_options[2]:
+            key_index = 0
 
-        content.image(logo)
-        header.subheader('Statistiques visiteurs')
+            with content.container(border=True):
 
-        df_analytics = pd.read_csv(db, sep=";")
+                for f in os.listdir(data_dir):
 
-        show_analytics(df_analytics, content)
-    
-    if sb_menu == menu_options[3]:
+                    if len(f) > 5:
 
-        content.image(logo)
-        header.subheader("Téléchargements")
+                        link = data_dir + f
+                        columns = st.columns(2)
 
-        key_index = 0
+                        columns[0].write(link)
 
-        with content.container(border=True):
-
-            for f in os.listdir(data_dir):
-
-                if len(f) > 5:
-
-                    link = data_dir + f
-                    columns = st.columns(2)
-
-                    columns[0].write(link)
-
-                    with open(link) as f:
-                        columns[1].download_button('Télécharger le fichier CSV', f, key=key_index)
-                        key_index += 1
+                        with open(link) as f:
+                            columns[1].download_button('Télécharger le fichier CSV', f, key=key_index)
+                            key_index += 1
 
     
 if __name__ == "__main__":
