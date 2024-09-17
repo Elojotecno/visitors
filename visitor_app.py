@@ -370,14 +370,12 @@ def main():
 
         for f in os.listdir(data_dir):
 
-            if not os.path.isdir(f):
+            if len(f) > 5:
                 link = data_dir + f
-                content.link_button(f, link)
 
                 if os.path.isfile(f):
-
                     with open(link) as f:
-                        content.download_button('Download CSV', f)
+                        content.download_button('Download CSV', f, 'text/csv')
 
     
 if __name__ == "__main__":
