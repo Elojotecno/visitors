@@ -99,10 +99,11 @@ def color_picker(df, column, content):
     if options_type != None:
         df = df[df[column].isin(options_type)]
 
-        for index, option in enumerate(options_type):
-            
-            #Create color selectbox per type
-            with st.expander("Réglages couleurs", expanded=False, icon=":material/waving_hand:"):
+        with st.expander("Réglages couleurs", expanded=False, icon=":material/waving_hand:"):
+
+            for index, option in enumerate(options_type):
+                
+                #Create color selectbox per type
                 colors[option] = st.selectbox(str(option), lst_colors, index=index, key = option)
 
         if len(colors) != 0:  
