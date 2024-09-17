@@ -14,6 +14,8 @@ import datetime
 import json
 import urllib.request
 import os.path
+import math
+import webcolors
 
 menu_options = ['Nouveau visiteur']
 menu_options_admin = ['Nouveau visiteur', 'Carte', 'Données', 'Téléchargements']
@@ -44,6 +46,66 @@ empty_data = {
                             'lat':None,
                             'lon':None,
                             }
+lst_colors = ["aliceblue", "blueviolet", "cornflowerblue",
+"cyan", "darkblue", "darkcyan",
+"darkgoldenrod", "darkgray", "darkgrey", "darkgreen",
+"lightblue", "lightcoral", "lightcyan",
+"lightgoldenrodyellow", "lightgray", "lightgrey",
+"lightgreen", "lightpink", "lightsalmon", "lightseagreen",
+"lightskyblue", "lightslategray", "lightslategrey",
+"lightsteelblue", "lightyellow", "lime", "limegreen",
+"linen", "magenta", "maroon", "paleturquoise",
+"palevioletred", "papayawhip", "peachpuff", "peru", "pink",
+"plum", "powderblue", "purple", "red", "skyblue",
+"tomato", "violet", "whitesmoke", "yellow", "yellowgreen"]
+
+def legend_layout(df, content, max_cols, colors, options_type):
+
+    import webcolors
+
+    with content.container(border=False):
+
+        layout_rows = math.ceil(len(options_type)/max_cols)
+        
+        for row in range(layout_rows):
+            
+            # set the start index in the list
+            start_index = max_cols * row
+            #Extract the options before loop
+            options = options_type[start_index:start_index + max_cols]
+
+            with st.container(border=False):
+
+                columns = st.columns(max_cols+1)
+
+                for index, option in enumerate(options):
+                    
+                    with columns[index+1]:
+    
+                        #Create color legend tile
+                        legend = f"{str(len(df[df['type'] == option]['name']))} {option}"
+                        st.color_picker(legend, webcolors.name_to_hex(colors[option]), key="color_picker_"+str(index)+str(row), disabled=False)
+                        
+
+def color_picker(df, column, content):
+
+    options_type = st.sidebar.multiselect("Pick up one or more categories", list(df[column].unique()), list(df[column].unique()), key="cat")
+    colors={}
+
+    if options_type!= None:
+        df = df[df[column].isin(options_type)]
+
+        for index, option in enumerate(options_type):
+            
+            #Create color selectbox per type
+            colors[option] = content.selectbox(option, lst_colors, key = option)
+
+        if len(colors) != 0:  
+
+            legend_layout(df, content, df[column].value_counts(), colors, options_type)
+                
+            # Assign color index for markers
+            df['color']= df["type"].apply(lambda x: colors[x])
 
 
 st.set_page_config(layout="wide")
@@ -131,8 +193,6 @@ def show_map(df, container):
 
     # create the maps
 
-
-
     scope = 'europe'
     projection = 'natural earth'
     theme = 'plotly_dark'
@@ -170,7 +230,7 @@ def show_map(df, container):
     
     fig.update_traces(marker=dict(size=8,
                     symbol="circle",
-                    color=df['sales'],
+                    color=df['color'],
                     line=dict(width=2,
                     color='lightskyblue',
                     )),
