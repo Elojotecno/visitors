@@ -459,7 +459,7 @@ def main():
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset
             df_analytics = select_dataset(data_dir, content)
             # Check that dataset is not None and not empty
-            data_check = check_df_status(df_map)
+            data_check = check_df_status(df_analytics)
             
             if data_check == True:
                 show_analytics(df_analytics, content)
