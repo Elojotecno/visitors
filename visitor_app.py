@@ -105,7 +105,7 @@ def color_picker(df, column, content):
             legend_layout(df, content, column, len(list(df[column].unique())), colors, options_type)
                 
             # Assign color index for markers
-            df['color']= df["type"].apply(lambda x: colors[x])
+            df['color']= df[column].apply(lambda x: colors[x])
 
             content.dataframe(df['color'])
 
