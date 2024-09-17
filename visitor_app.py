@@ -99,7 +99,7 @@ def color_picker(df, column, content):
     if options_type != None:
         df = df[df[column].isin(options_type)]
 
-        with st.expander("Réglages couleurs", expanded=False, icon=":material/waving_hand:"):
+        with content.expander("Réglages couleurs", expanded=False, icon=":material/waving_hand:"):
 
             for index, option in enumerate(options_type):
                 
