@@ -372,11 +372,14 @@ def main():
         for f in os.listdir(data_dir):
 
             if len(f) > 5:
+
                 link = data_dir + f
-                content.write(link)
+                columns = content.columns(2)
                 
+                columns[0].write(link)
+
                 with open(link) as f:
-                    content.download_button('Download CSV', f, key=key_index)
+                    columns[1].download_button('Download CSV', f, key=key_index)
                     key_index += 1
 
     
