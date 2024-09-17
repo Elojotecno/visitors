@@ -261,18 +261,24 @@ def listdir(path):
 
     return list_file
 
-def select_dataset(data_dir, content, label_display, instr_all="Fusionner"):
+def make_filepath(dir, file):
+
+    filepath = dir + file
+
+    return filepath
+
+def select_dataset(data_dir, content, instr_all="Fusionner"):
 
     # search datasets in directory and put them in a selectbox
     datasets = listdir(data_dir)
 
     df_ = None
-    col1, col2 = content.columns(2)
 
     if len(datasets) !=0:
 
         datasets.append(instr_all)
-        selected_data = col1.selectbox("Données", datasets, index=0)          
+        selected_data = content.selectbox("Données", datasets, index=0)
+        master_dataset = make_filepath(data_dir, selected_data)          
 
         if selected_data == instr_all:
 
@@ -282,7 +288,7 @@ def select_dataset(data_dir, content, label_display, instr_all="Fusionner"):
 
                 for dataset in datasets[:-1]:
 
-                    new = pd.read_csv(data_dir + dataset, sep=";")
+                    new = pd.read_csv(make_filepath(data_dir, dataset), sep=";")
 
                     if df_ is None:
                         df_ = pd.concat([empty, new], ignore_index=True)
@@ -290,25 +296,12 @@ def select_dataset(data_dir, content, label_display, instr_all="Fusionner"):
                         df_ = pd.concat([df_, new], ignore_index=True)
             
             else:
-                master_dataset = data_dir + selected_data
                 df_ = pd.read_csv(master_dataset, sep=";")
                     
         else:
-            master_dataset = data_dir + selected_data
             df_ = pd.read_csv(master_dataset, sep=";")
 
-    # If empty dataset, reset map and data display
-    if (df_ is not None) and (df_.shape[0] == 0):
-        disabled = True
-        value = False
-    else:
-        disabled = False
-        value = True
-    
-    with st.sidebar:
-        display_object = col2.checkbox(label_display, value=value, disabled=disabled)
-
-    return df_, display_object
+    return df_
 
 
 def main():
@@ -426,28 +419,30 @@ def main():
 
         if sb_menu == menu_options_admin[1]:
 
-            content.image(logo)
+            header.image(logo)
             header.subheader('Geomapping visiteurs')
 
-            df_map, map_out = select_dataset(data_dir, content, "Afficher la carte")
+            # Search datasets in a directory, create a selectbox of datasets and return a single dataset 
+            df_map = select_dataset(data_dir, content)
             
-            if map_out:
+            if df_map is not None:
                 show_map(df_map, content)
 
 
         if sb_menu == menu_options_admin[2]:
 
-            content.image(logo)
+            header.image(logo)
             header.subheader('Statistiques visiteurs')
 
-            df_analytics, yield_data = select_dataset(data_dir, content, "Afficher les données")
+            # Search datasets in a directory, create a selectbox of datasets and return a single dataset
+            df_analytics = select_dataset(data_dir, content)
 
-            if yield_data:
+            if df_analytics is not None:
                 show_analytics(df_analytics, content)
         
         if sb_menu == menu_options_admin[3]:
 
-            content.image(logo)
+            header.image(logo)
             header.subheader("Téléchargements")
 
             key_index = 0
