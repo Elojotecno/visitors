@@ -57,7 +57,6 @@ def check_password(controller):
         controller.set('usr', st.session_state["username"])
         
         if st.session_state["username"] in st.secrets["passwords"]:
-            st.write(f'Username found in secrets box.')
             
             if hmac.compare_digest(st.session_state["password"], st.secrets.passwords[st.session_state["username"]]):
                 st.session_state["password_correct"] = True
@@ -66,16 +65,17 @@ def check_password(controller):
 
             else:
                 st.session_state["password_correct"] = False
+                st.write(st.sessions_state)
 
     # Return True if the username + password is validated.
     if st.session_state.get("password_correct", False):
-        return False
+        return True
 
     # Show inputs for username + password.
     login_form()
     if "password_correct" in st.session_state:
         st.error("😕 User not known or password incorrect")
-    return False
+        return True
 
 def add_visitor(file, data, container):
     
