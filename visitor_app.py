@@ -91,10 +91,10 @@ def legend_layout(df, content, max_cols, colors, options_type):
                         
 def color_picker(df, column, content):
 
-    options_type = st.sidebar.multiselect("Pick up one or more categories", list(df[column].unique()), list(df[column].unique()), key="cat")
+    options_type = content.multiselect("Pick up one or more categories", list(df[column].unique()), list(df[column].unique()), key="cat")
     colors={}
 
-    if options_type!= None:
+    if options_type != None:
         df = df[df[column].isin(options_type)]
 
         for index, option in enumerate(options_type):
@@ -104,13 +104,12 @@ def color_picker(df, column, content):
 
         if len(colors) != 0:  
 
-            legend_layout(df, content, df[column].value_counts(), colors, options_type)
+            legend_layout(df, content, len(list(df[column].unique())), colors, options_type)
                 
             # Assign color index for markers
             df['color']= df["type"].apply(lambda x: colors[x])
 
             content.dataframe(df['color'])
-
 
 def add_header_content(header_id, logo, title):
 
