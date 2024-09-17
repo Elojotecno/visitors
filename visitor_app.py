@@ -85,8 +85,6 @@ def check_password(controller):
     return False
 
 def add_visitor(file, data, container):
-
-    st.dataframe(data)
     
     if os.path.isfile(file):
         df = pd.read_csv(file, sep=";")
@@ -339,10 +337,16 @@ def main():
 
         df_map = pd.read_csv(db, sep=";")
 
-        show_map(df_map, content)
+        with st.sidebar:
+            display_map = st.checkbox("Afficher la carte")
+            display_data = st.checkbox("Afficher les données")
+        
+        if display_map:
+            show_map(df_map, content)
 
-        criteria = content.selectbox("Critère", df_map.columns, index=5)
-        show_data(df_map, content, criteria)
+        if display_data:
+            criteria = content.selectbox("Critère", df_map.columns, index=5)
+            show_data(df_map, content, criteria)
 
     if sb_menu == menu_options[2]:
 
