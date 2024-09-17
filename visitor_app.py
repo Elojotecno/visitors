@@ -90,7 +90,8 @@ def add_visitor(file, data, container):
         df = pd.read_csv(file, sep=";")
         df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
         df.to_csv(file, sep=";", index=False)
-        
+
+    container.dataframe(df)   
     container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées le {data['date'].split(',')[0]} à {data['date'].split(',')[1]}.", icon="ℹ️")
 
 def geocode_adr(adr, country='France'):
