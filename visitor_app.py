@@ -244,7 +244,8 @@ def main():
     #st.write(f'{user_cookie}')
 
     # Create logo and user dataset according to the user
-    if (user_cookie is not None) and (user_cookie != "Admin"):
+    if user_cookie is not None:
+        
         logo = user_logo[user_cookie]
         db = user_db[user_cookie]
 
