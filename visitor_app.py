@@ -13,6 +13,7 @@ import plotly.express as px
 import datetime
 import json
 import urllib.request
+import os.path
 
 menu_options = ['Nouveau visiteur', 'Carte', 'Données']
 users_list = {"FullwoodJoz" : ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'], "Transfaire" : ["Transfaire"]}
@@ -22,6 +23,7 @@ brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Le
 user_db = {"FullwoodJoz" : "./data/fj_visitors.csv", "Transfaire" : "./data/trf_visitors.csv"}
 user_logo = {"FullwoodJoz" : "./img/fjm.png", "Transfaire" : "./img/transfaire.png"}
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
+
 
 st.set_page_config(layout="wide")
 
@@ -43,7 +45,6 @@ def search_city(zip):
         for info in json_lisible:
             noms_ville.append(info['nom'])
         return noms_ville
-
 
 def check_password(controller):
     
@@ -77,7 +78,7 @@ def check_password(controller):
 
     # Show inputs for username + password.
     login_form()
-    st.write(st.session_state)
+    #st.write(st.session_state)
     
     if "password_correct" in st.session_state:
         st.error("😕 User not known or password incorrect")
@@ -85,10 +86,11 @@ def check_password(controller):
 
 def add_visitor(file, data, container):
     
-    df = pd.read_csv(file, sep=";")
-    df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
-    df.to_csv(file, sep=";", index=False)
-
+    if os.path.isfile(file):
+        df = pd.read_csv(file, sep=";")
+        df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
+        df.to_csv(file, sep=";", index=False)
+        
     container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées le {data['date'].split(',')[0]} à {data['date'].split(',')[1]}.", icon="ℹ️")
 
 def geocode_adr(adr, country='France'):
@@ -229,23 +231,31 @@ def main():
     controller = CookieController()
     user_cookie = controller.get('usr')
 
+    # Check security access
     if not check_password(controller):
         st.stop()
     
-    st.write(f'Bienvenue {user_cookie}')
+    # Welcome text
+    st.write(f'{user_cookie}')
 
+    # Create logo and user dataset according to the user
     if user_cookie is not None:
         logo = user_logo[user_cookie]
         db = user_db[user_cookie]
 
     # App lay-out
+    
+    # Header
     header = st.container(border=False)
     
+    # Body
     content = st.container(border=False)
     
+    # Footer
     footer = st.container(border=False)
     footer.write("YM - 2024")
 
+    # Menu sidebar
     with st.sidebar:
 
         st.image(logo)
