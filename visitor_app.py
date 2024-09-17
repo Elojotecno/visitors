@@ -267,7 +267,7 @@ def make_filepath(dir, file):
 
     return filepath
 
-def check_df_status(df):
+def check_df_status(df, container):
 
     result= False
 
@@ -277,13 +277,13 @@ def check_df_status(df):
 
         if df.shape[0] == 0:
             result = False
-            result = st.write("😕 Pas de données disponible.")
+            result = container.write("😕 Pas de données disponible.")
         else:
             result = True
     
     else:
         result = False
-        result = st.write("😕 Pas de données disponible.")
+        result = container.write("😕 Pas de données disponible.")
     
     return result
 
@@ -445,7 +445,7 @@ def main():
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset 
             df_map = select_dataset(data_dir, content)
             # Check that dataset is not None and not empty
-            map_check = check_df_status(df_map)
+            map_check = check_df_status(df_map, content)
             
             if map_check == True:
                 show_map(df_map, content)              
@@ -459,7 +459,7 @@ def main():
             # Search datasets in a directory, create a selectbox of datasets and return a single dataset
             df_analytics = select_dataset(data_dir, content)
             # Check that dataset is not None and not empty
-            data_check = check_df_status(df_analytics)
+            data_check = check_df_status(df_analytics, content)
             
             if data_check == True:
                 show_analytics(df_analytics, content)
