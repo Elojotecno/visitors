@@ -50,7 +50,7 @@ def check_password(controller):
         with st.form("Credentials"):
             st.text_input("Utilisateur", key="username")
             st.text_input("Mot de passe", type="password", key="password")
-            st.form_submit_button("Log in", on_click=password_entered)
+            st.form_submit_button("Valider", on_click=password_entered)
         
     def password_entered():
 
@@ -63,6 +63,7 @@ def check_password(controller):
             st.secrets.passwords[st.session_state["username"]],
         ):
             st.session_state["password_correct"] = True
+            st.write(st.session_state["password_correct"])
             del st.session_state["password"]  # Don't store the username or password.
             del st.session_state["username"]
         else:
