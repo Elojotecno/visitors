@@ -352,9 +352,6 @@ def main():
 
             df_map = pd.read_csv(db, sep=";")        
 
-            with content.expander(f"Base de données: {user_db[user_cookie]}"):
-                st.dataframe(df_map)
-
             with st.sidebar:
                 display_map = st.checkbox("Afficher la carte")
                 display_data = st.checkbox("Afficher les données")
@@ -382,7 +379,7 @@ def main():
 
             key_index = 0
 
-            with content.container(border=True):
+            with content.container(border=False):
 
                 for f in os.listdir(data_dir):
 
