@@ -335,7 +335,7 @@ def main():
 
         header.subheader('Geomapping visiteurs')
 
-        df_map = pd.read_csv(db.iloc[:,2:], sep=";")
+        df_map = pd.read_csv(db.loc[:,2:], sep=";")
 
         show_map(df_map, content)
 
