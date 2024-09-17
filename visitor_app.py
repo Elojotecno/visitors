@@ -257,8 +257,60 @@ def listdir(path):
 
         if len(f) > 5:
             list_file.append(f)
+
+
     return list_file
- 
+
+def select_dataset(data_dir, content, label_display, instr_all="Fusionner"):
+
+    # search datasets in directory and put them in a selectbox
+    datasets = listdir(data_dir)
+
+    df_ = None
+    col1, col2 = content.columns(2)
+
+    if len(datasets) !=0:
+
+        datasets.append(instr_all)
+        selected_data = col1.selectbox("Données", datasets, index=0)          
+
+        if selected_data == instr_all:
+
+            if len(datasets[:-1]) > 1:
+
+                empty = pd.DataFrame([empty_data])
+
+                for dataset in datasets[:-1]:
+
+                    new = pd.read_csv(data_dir + dataset, sep=";")
+
+                    if df_ is None:
+                        df_ = pd.concat([empty, new], ignore_index=True)
+                    else:
+                        df_ = pd.concat([df_, new], ignore_index=True)
+            
+            else:
+                master_dataset = data_dir + selected_data
+                df_ = pd.read_csv(master_dataset, sep=";")
+                    
+        else:
+            master_dataset = data_dir + selected_data
+            df_ = pd.read_csv(master_dataset, sep=";")
+
+    # If empty dataset, reset map and data display
+    if (df_ is not None) and (df_.shape[0] == 0):
+        disabled = True
+        value = False
+    else:
+        disabled = False
+        value = True
+    
+    with st.sidebar:
+        display_object = col2.checkbox(label_display, value=value, disabled=disabled)
+
+    return df_, display_object
+
+
 def main():
         
     controller = CookieController()
@@ -304,7 +356,6 @@ def main():
                                             menu_options, 
                                             icons=menu_icon, 
                                             menu_icon='cast', default_index=0, orientation="vertical")
-
 
     if sb_menu == menu_options[0]:
 
@@ -378,70 +429,21 @@ def main():
             content.image(logo)
             header.subheader('Geomapping visiteurs')
 
-            # search datasets in dir and put them in a selectbox
-            datasets = listdir(data_dir)
-
-            df_map = None
-
-            if len(datasets) !=0:
-                datasets.append("Compile")
-                selected_data = st.sidebar.selectbox("Données", datasets, index=0)          
-                
-
-                if selected_data == "Compile":
-
-                    if len(datasets[:-1]) > 1:
-
-                        empty = pd.DataFrame([empty_data])
-
-                        for dataset in datasets[:-1]:
-
-                            new = pd.read_csv(data_dir + dataset, sep=";")
-
-                            if df_map is None:
-                                df_map = pd.concat([empty, new], ignore_index=True)
-                            else:
-                                df_map = pd.concat([df_map, new], ignore_index=True)
-                    
-                    else:
-                        master_dataset = data_dir + selected_data
-                        df_map = pd.read_csv(master_dataset, sep=";")
-                            
-                else:
-                    master_dataset = data_dir + selected_data
-                    df_map = pd.read_csv(master_dataset, sep=";")
+            df_map, map_out = select_dataset(data_dir, content, "Afficher la carte")
             
-            # If empty dataset, reset map and data display
-            if (df_map is not None) and (df_map.shape[0] == 0):
-                disable_map = True
-                disable_data = True
-                val_map = False
-                val_data = False
-            else:
-                disable_map = False
-                disable_data = False
-                val_map = True
-                val_data = True
-           
-            with st.sidebar:
-                display_map = st.checkbox("Afficher la carte", value=val_map, disabled=disable_map)
-                display_data = st.checkbox("Afficher les données", value=val_data, disabled=disable_data)
-            
-            if display_map:
+            if map_out:
                 show_map(df_map, content)
 
-            if display_data:
-                criteria = content.selectbox("Critère", df_map.columns, index=0)
-                show_data(df_map, content, criteria)
 
         if sb_menu == menu_options_admin[2]:
 
             content.image(logo)
             header.subheader('Statistiques visiteurs')
 
-            df_analytics = pd.read_csv(db, sep=";")
+            df_analytics, yield_data = select_dataset(data_dir, content, "Afficher les données")
 
-            show_analytics(df_analytics, content)
+            if yield_data:
+                show_analytics(df_analytics, content)
         
         if sb_menu == menu_options_admin[3]:
 
