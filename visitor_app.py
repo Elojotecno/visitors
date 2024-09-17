@@ -56,18 +56,16 @@ def check_password(controller):
 
         controller.set('usr', st.session_state["username"])
         
-        if st.session_state["username"] in st.secrets[
-            "passwords"
-        ] and hmac.compare_digest(
-            st.session_state["password"],
-            st.secrets.passwords[st.session_state["username"]],
-        ):
-            st.session_state["password_correct"] = True
-            st.write(st.session_state["password_correct"])
-            del st.session_state["password"]  # Don't store the username or password.
-            del st.session_state["username"]
-        else:
-            st.session_state["password_correct"] = False
+        if st.session_state["username"] in st.secrets["passwords"]:
+            st.write(f'Username found in secrets box.')
+            
+            if hmac.compare_digest(st.session_state["password"], st.secrets.passwords[st.session_state["username"]]):
+                st.session_state["password_correct"] = True
+                del st.session_state["password"]  # Don't store the username or password.
+                del st.session_state["username"]
+
+            else:
+                st.session_state["password_correct"] = False
 
     # Return True if the username + password is validated.
     if st.session_state.get("password_correct", False):
