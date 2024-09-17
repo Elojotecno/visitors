@@ -15,7 +15,7 @@ import json
 import urllib.request
 import os.path
 
-menu_options = ['Nouveau visiteur', 'Carte', 'Données']
+menu_options = ['Nouveau visiteur', 'Carte', 'Données', 'Téléchargements']
 users_list = {"FullwoodJoz" : ['...', 'Fabien', 'Marine', 'Sébastien', 'Silvia', 'Sophie', 'Yann'], "Transfaire" : ["Transfaire"]}
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
 eqt_list = ['TPA', 'Epi', 'Roto', 'Robot', 'Autre']
@@ -23,6 +23,7 @@ brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Le
 user_db = {"FullwoodJoz" : "./data/fj_visitors.csv", "Transfaire" : "./data/trf_visitors.csv"}
 user_logo = {"FullwoodJoz" : "./img/fjm.png", "Transfaire" : "./img/transfaire.png"}
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
+data_dir= './data'
 
 
 st.set_page_config(layout="wide")
@@ -362,7 +363,21 @@ def main():
         content.image(logo)
 
         show_analytics(df_analytics, content)
-       
+    
+    if sb_menu == menu_options[3]:
+
+        header.subheader("Téléchargements")
+
+        index = 0
+        for f in os.listdir(data_dir):
+
+            if os.path.isfile(f):
+
+                columns = st.columns(2)
+                link = data_dir + f
+                columns[0].write(link)
+                columns[1].download_button(label="Download data as CSV", data=pd.read_csv(link; sep=";"), file_name=f, mime="text/csv")
+                
     
 if __name__ == "__main__":
     main()    
