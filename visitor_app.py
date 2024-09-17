@@ -353,8 +353,8 @@ def main():
             df_map = pd.read_csv(db, sep=";")        
 
             with st.sidebar:
-                display_map = st.checkbox("Afficher la carte")
-                display_data = st.checkbox("Afficher les données")
+                display_map = st.checkbox("Afficher la carte", value=True)
+                display_data = st.checkbox("Afficher les données", value=False)
             
             if display_map:
                 show_map(df_map, content)
