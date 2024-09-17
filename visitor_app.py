@@ -86,7 +86,7 @@ def legend_layout(df, content, column, max_cols, colors, options_type):
                     with columns[index+1]:
     
                         #Create color legend tile
-                        legend = f"{str(len(df[df[column] == option]['name']))} {option}"
+                        legend = f" {option} ({str(len(df[df[column] == option]['name']))})"
                         st.color_picker(legend, webcolors.name_to_hex(colors[option]), key="color_picker_"+str(index)+str(row), disabled=False)
                         
 def color_picker(df, column, content):
