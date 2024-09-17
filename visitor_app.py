@@ -374,7 +374,7 @@ def main():
                 link = data_dir + f
                 content.write(link)
                 with open(link) as f:
-                    content.download_button('Download CSV', f, 'text/csv')
+                    content.download_button('Download CSV', f, 'text/csv', key=f[:5])
 
     
 if __name__ == "__main__":
