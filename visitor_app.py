@@ -384,11 +384,11 @@ def main():
             df_map = None
 
             if len(datasets) !=0:
-                datasets.append("All")
+                datasets.append("Compile")
                 selected_data = st.sidebar.selectbox("Données", datasets, index=0)          
                 
 
-                if selected_data == "All":
+                if selected_data == "Compile":
 
                     if len(datasets[:-1]) > 1:
 
