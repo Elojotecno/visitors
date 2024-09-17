@@ -1,3 +1,5 @@
 [theme]
 base="light"
-primaryColor="purple"
+primaryColor="#2596be"
+textColor="#31333F"
+font="serif"
