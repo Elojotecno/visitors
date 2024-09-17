@@ -372,10 +372,9 @@ def main():
 
             if len(f) > 5:
                 link = data_dir + f
-
-                if os.path.isfile(f):
-                    with open(link) as f:
-                        content.download_button('Download CSV', f, 'text/csv')
+                content.write(link)
+                with open(link) as f:
+                    content.download_button('Download CSV', f, 'text/csv')
 
     
 if __name__ == "__main__":
