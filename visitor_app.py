@@ -231,6 +231,16 @@ def show_analytics(df, container):
             hist_graph(df, fig_hist1, col_hist1, "sales", "sales", "Visiteurs par SAM")
 
             hist_graph(df, fig_hist2, col_hist2, "date", None, "Visiteurs par date & heure")
+
+def listdir(path):
+
+    list_file = []
+
+    for f in os.listdir(path):
+
+        if len(f) > 5:
+            list_file.append(f)
+    return list_file
  
 def main():
         
@@ -351,16 +361,23 @@ def main():
             content.image(logo)
             header.subheader('Geomapping visiteurs')
 
-            df_map = pd.read_csv(db, sep=";")
+            # search datasets in dir and put them in a selectbox
+            datasets = listdir(data_dir)
+
+            if len(datasets) !=0:
+                datasets.append("All")
+                selected_data = st.sidebar.selectbox("Base de données", datasets, datasets[0])          
+                master_dataset = data_dir + selected_data
+                df_map = pd.read_csv(master_dataset, sep=";")
             
             # If empty dataset, reset map and data display
             if df_map.shape[0] == 0:
-                disp_map = False
-                disp_data = False
-
+                disable_map = False
+                disable_data = False
+           
             with st.sidebar:
-                display_map = st.checkbox("Afficher la carte", value=disp_map)
-                display_data = st.checkbox("Afficher les données", value=disp_data)
+                display_map = st.checkbox("Afficher la carte", value=False, disabled=disable_map)
+                display_data = st.checkbox("Afficher les données", value=False, disabled=disable_data)
             
             if display_map:
                 show_map(df_map, content)
