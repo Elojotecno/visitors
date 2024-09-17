@@ -17,7 +17,8 @@ import urllib.request
 prod_list = ['M²erlin', 'Barn-E', 'Nano', 'Moov', 'Racleur', 'Autre']
 eqt_list = ['TPA', 'Epi', 'Roto', 'Robot', 'Autre']
 brand_list = ['Boumatic', 'Delaval', 'Fullwood', 'Gascoigne-Melotte', 'GEA', 'Lely', 'Manus', 'Surge', 'Autre']
-file = "./data/visitors.csv"
+user_db = {"FullwoodJoz" : "./data/fj_visitors.csv", "Transfaire" : "./data/trf_visitors.csv"}
+user_logo = {"FullwoodJoz" : "./img/fjm.png", "Transfaire" : "./img/transfaire.png"}
 terms_and_conditions_fj = "https://www.fullwoodjoz.com/fr/terms-and-conditions/"
 
 st.set_page_config(layout="wide")
@@ -46,7 +47,7 @@ def check_password(controller):
     def login_form():
         
         with st.form("Credentials"):
-            st.text_input("Username", key="username")
+            st.selectbox("Username", ("FullwoodJoz", "Transfaire"), key="username")
             st.text_input("Password", type="password", key="password")
             st.form_submit_button("Log in", on_click=password_entered)
 
@@ -227,6 +228,10 @@ def main():
     
     st.write(f'Bienvenue {user_cookie}')
 
+    if user_cookie is not None:
+        logo = user_logo[user_cookie]
+        db = user_db[user_cookie]
+
     # App lay-out
     header = st.container(border=False)
     
@@ -236,11 +241,6 @@ def main():
     footer.write("YM - 2024")
 
     with st.sidebar:
-
-        if user_cookie == "Transfaire":
-            logo = 'img/transfaire.png'
-        else:
-            logo = 'img/fjm.png'
 
         st.image(logo, width=141)
 
@@ -309,17 +309,16 @@ def main():
                             'lon':lon,
                             }
                         
-                        add_visitor(file, data_dict, content)
+                        add_visitor(db, data_dict, content)
             else:
 
-                content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")
-                    
+                content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")             
 
     if sb_menu == "Map":
 
         header.subheader('Geomapping visiteurs')
 
-        df_map = pd.read_csv(file, sep=";")
+        df_map = pd.read_csv(db, sep=";")
 
         show_map(df_map, content)
 
@@ -330,13 +329,10 @@ def main():
 
         header.subheader('Statistiques visiteurs')
 
-        df_analytics = pd.read_csv(file, sep=";")
+        df_analytics = pd.read_csv(db, sep=";")
 
         show_analytics(df_analytics, content)
        
     
 if __name__ == "__main__":
     main()    
-
-   
-
