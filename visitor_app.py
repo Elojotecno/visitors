@@ -237,7 +237,7 @@ def main():
         st.stop()
     
     # Welcome text
-    st.write(f'{user_cookie}')
+    #st.write(f'{user_cookie}')
 
     # Create logo and user dataset according to the user
     if user_cookie is not None:
@@ -335,7 +335,7 @@ def main():
 
         header.subheader('Geomapping visiteurs')
 
-        df_map = pd.read_csv(db, sep=";")
+        df_map = pd.read_csv(db.iloc[:,2:], sep=";")
 
         show_map(df_map, content)
 
