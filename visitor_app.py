@@ -85,11 +85,13 @@ def check_password(controller):
     return False
 
 def add_visitor(file, data, container):
+
+    st.dataframe(data)
     
     if os.path.isfile(file):
         df = pd.read_csv(file, sep=";")
         df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
-        df.to_csv(file, sep=";", index=True)
+        df.to_csv(file, sep=";", index=False)
         
     container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées le {data['date'].split(',')[0]} à {data['date'].split(',')[1]}.", icon="ℹ️")
 
@@ -179,7 +181,6 @@ def show_map(df, container):
 
 def show_data(df, container, criteria):
 
-    df = df.iloc[: , 1:4]
     container.dataframe(df.sort_values(by=criteria, ascending=True))
 
 def pie_graph(df, fig, wrapper, values, names, title, hole=.5):
@@ -327,6 +328,7 @@ def main():
                             }
                         
                         add_visitor(db, data_dict, content)
+                        
             else:
 
                 content.warning('Vous devez accepter les conditions sur la vie privée.', icon="⚠️")             
@@ -337,9 +339,9 @@ def main():
 
         df_map = pd.read_csv(db, sep=";")
 
-        show_map(df_map.iloc[:, 1:], content)
+        show_map(df_map, content)
 
-        criteria = content.selectbox("Critère", df_map.columns[1:], index=5)
+        criteria = content.selectbox("Critère", df_map.columns, index=5)
         show_data(df_map, content, criteria)
 
     if sb_menu == menu_options[2]:
