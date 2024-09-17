@@ -89,7 +89,7 @@ def add_visitor(file, data, container):
     if os.path.isfile(file):
         df = pd.read_csv(file, sep=";")
         df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
-        df.to_csv(file, sep=";", index=False)
+        df.to_csv(file, sep=";", index=True)
         
     container.info(f"Informations concernant {data['farm']} dans le dept. {data['dept']} bien enregistrées le {data['date'].split(',')[0]} à {data['date'].split(',')[1]}.", icon="ℹ️")
 
@@ -100,7 +100,7 @@ def geocode_adr(adr, country='France'):
 
     return location.latitude, location.longitude
 
-def show_map(df, container):  
+def show_map(df, container):
 
     # create the maps
 
@@ -177,8 +177,9 @@ def show_map(df, container):
     
     container.plotly_chart(fig, use_container_width=True)
 
-def show_stats(df, container, criteria):
+def show_data(df, container, criteria):
 
+    df = df.iloc[: , 1:4]
     container.dataframe(df.sort_values(by=criteria, ascending=True))
 
 def pie_graph(df, fig, wrapper, values, names, title, hole=.5):
