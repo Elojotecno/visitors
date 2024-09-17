@@ -58,6 +58,9 @@ lst_colors = ["aliceblue", "blueviolet", "cornflowerblue",
 "palevioletred", "papayawhip", "peachpuff", "peru", "pink",
 "plum", "powderblue", "purple", "red", "skyblue",
 "tomato", "violet", "whitesmoke", "yellow", "yellowgreen"]
+map_options = ['sales', 'dept', 'eqt', 'product']
+               
+st.set_page_config(layout="wide")
 
 def legend_layout(df, content, max_cols, colors, options_type):
 
@@ -86,7 +89,6 @@ def legend_layout(df, content, max_cols, colors, options_type):
                         legend = f"{str(len(df[df['type'] == option]['name']))} {option}"
                         st.color_picker(legend, webcolors.name_to_hex(colors[option]), key="color_picker_"+str(index)+str(row), disabled=False)
                         
-
 def color_picker(df, column, content):
 
     options_type = st.sidebar.multiselect("Pick up one or more categories", list(df[column].unique()), list(df[column].unique()), key="cat")
@@ -107,8 +109,8 @@ def color_picker(df, column, content):
             # Assign color index for markers
             df['color']= df["type"].apply(lambda x: colors[x])
 
+            content.dataframe(df['color'])
 
-st.set_page_config(layout="wide")
 
 def add_header_content(header_id, logo, title):
 
@@ -514,6 +516,8 @@ def main():
             map_check = check_df_status(df_map, content)
             
             if map_check == True:
+                feature = content.selectbox("Pick up one category", map_options, index=0)
+                color_picker(df_map, feature, content)
                 show_map(df_map, content)              
 
 
