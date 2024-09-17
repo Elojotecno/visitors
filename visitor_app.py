@@ -64,7 +64,7 @@ st.set_page_config(layout="wide")
 
 def legend_layout(df, content, column, max_cols, colors, options_type):
 
-    # Create a map legend layout showing selected items and associated color
+    # Create a map legend layout showing selected items, number of occurences per item and associated color
 
     with content.container(border=False):
 
@@ -102,13 +102,14 @@ def color_picker(df, column, content):
         for index, option in enumerate(options_type):
             
             #Create color selectbox per type
-            colors[option] = content.selectbox(str(option), lst_colors, key = option)
+            colors[option] = content.selectbox(str(option), lst_colors, index=index, key = option)
 
         if len(colors) != 0:  
 
+            # Create a legend layout showing markers color
             legend_layout(df, content, column, len(list(df[column].unique())), colors, options_type)
                 
-            # Assign color index for markers
+            # Assign color index to markers and create a new column in dataset
             df['color']= df[column].apply(lambda x: colors[x])
         
         return df
