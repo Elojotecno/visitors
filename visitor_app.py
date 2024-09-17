@@ -75,7 +75,7 @@ def check_password(controller):
     login_form()
     if "password_correct" in st.session_state:
         st.error("😕 User not known or password incorrect")
-        return True
+    return False
 
 def add_visitor(file, data, container):
     
