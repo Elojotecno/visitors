@@ -371,13 +371,13 @@ def main():
         key_index = 0
 
         with content.container(border=True):
-            
+
             for f in os.listdir(data_dir):
 
                 if len(f) > 5:
 
                     link = data_dir + f
-                    columns = content.columns(2)
+                    columns = st.columns(2)
 
                     columns[0].write(link)
 
