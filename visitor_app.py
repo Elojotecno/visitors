@@ -394,10 +394,10 @@ def main():
                         empty = pd.DataFrame([empty_data])
 
                         for dataset in datasets[:-1]:
-                            
+
                             new = pd.read_csv(data_dir + dataset, sep=";")
 
-                            if df_map.shape[0] == 0:
+                            if df_map is None:
                                 df_map = pd.concat([empty, new], ignore_index=True)
                             else:
                                 df_map = pd.concat([df_map, new], ignore_index=True)
