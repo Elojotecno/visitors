@@ -66,28 +66,28 @@ def legend_layout(df, content, column, max_cols, colors, options_type):
 
     # Create a map legend layout showing selected items, number of occurences per item and associated color
 
-    with content.container(border=False):
+    #with content.container(border=False):
 
-        layout_rows = math.ceil(len(options_type)/max_cols)
-        
-        for row in range(layout_rows):
-            
-            # set the start index in the list
-            start_index = max_cols * row
-            #Extract the options before loop
-            options = options_type[start_index:start_index + max_cols]
-
-            with st.container(border=False):
-
-                columns = st.columns(max_cols+1)
-
-                for index, option in enumerate(options):
-                    
-                    with columns[index+1]:
+    layout_rows = math.ceil(len(options_type)/max_cols)
     
-                        #Create color legend tile
-                        legend = f" {option} ({str(len(df[df[column] == option]['name']))})"
-                        st.color_picker(legend, webcolors.name_to_hex(colors[option]), key="color_picker_"+str(index)+str(row), disabled=False)
+    for row in range(layout_rows):
+        
+        # set the start index in the list
+        start_index = max_cols * row
+        #Extract the options before loop
+        options = options_type[start_index:start_index + max_cols]
+
+        #with st.container(border=False):
+
+        columns = st.columns(max_cols+1)
+
+        for index, option in enumerate(options):
+            
+            with columns[index+1]:
+
+                #Create color legend tile
+                legend = f" {option} ({str(len(df[df[column] == option]['name']))})"
+                st.color_picker(legend, webcolors.name_to_hex(colors[option]), key="color_picker_"+str(index)+str(row), disabled=False)
                         
 def color_picker(df, column, content):
 
