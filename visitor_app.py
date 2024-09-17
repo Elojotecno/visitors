@@ -260,7 +260,7 @@ def main():
     # Menu sidebar
     with st.sidebar:
 
-        st.image(logo)
+        #st.image(logo)
 
         sb_menu = option_menu('Menu', 
                                         menu_options, 
@@ -364,6 +364,7 @@ def main():
     
     if sb_menu == menu_options[3]:
 
+        content.image(logo)
         header.subheader("Téléchargements")
 
         key_index = 0
